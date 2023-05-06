@@ -1,22 +1,15 @@
 package com.example.bilabonnement.Model;
+import com.example.bilabonnement.Component.BasicInfoComponent.Fuel;
 
-enum typesOfFuel{
-    DIESEL, BENZINE
-}
-
-enum health{
-    FINE, PARTIALLY_DAMAGED, HEAVILY_DAMAGED, COMPLETELY_DAMAGED
-}
 public class Car {
     private int carID;
     private int modelID;
     private int modelYear;
     private String brandName;
     private String modelName;
-    private typesOfFuel fuelType;
     private int mileage;
-    private int healthID;
-    private health healthStatus;
+    private int healthStatusID;
+    private Fuel fuelType;
 
     public Car(){
         //Empty constructor
@@ -62,14 +55,6 @@ public class Car {
         this.modelName = modelName;
     }
 
-    public typesOfFuel getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(typesOfFuel fuelType) {
-        this.fuelType = fuelType;
-    }
-
     public int getMileage() {
         return mileage;
     }
@@ -78,19 +63,19 @@ public class Car {
         this.mileage = mileage;
     }
 
-    public int getHealthID() {
-        return healthID;
+    public int getHealthStatusID() {
+        return healthStatusID;
     }
 
-    public void setHealthID(int healthID) {
-        this.healthID = healthID;
+    public void setHealthStatusID(int healthStatusID) {
+        this.healthStatusID = healthStatusID;
     }
 
-    public health getHealthStatus() {
-        return healthStatus;
+    public Fuel getFuelType() {
+        return fuelType;
     }
 
-    public void setHealthStatus(health healthStatus) {
-        this.healthStatus = healthStatus;
+    public void setFuelType(Fuel fuelType) {
+        this.fuelType = fuelType;
     }
 }
