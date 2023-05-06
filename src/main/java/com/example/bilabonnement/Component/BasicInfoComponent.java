@@ -1,5 +1,4 @@
 package com.example.bilabonnement.Component;
-import com.example.bilabonnement.Model.Location;
 import com.example.bilabonnement.Service.Service;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,8 @@ import java.util.List;
 
 @Component
 public class BasicInfoComponent {
-    private List<Location> locationList;
-    private HashMap<String, Location> locationMap;
+    private List<String> locationList;
+    private HashMap<String, String> locationMap;
     private List<String> employeePositionList;
     private List<String> carHealthStatusList;
 
@@ -30,11 +29,11 @@ public class BasicInfoComponent {
 //        carHealthStatusList = service.fetchCarHealthStatusAsList();
     }
 
-    public List<Location> getLocationList() {
+    public List<String> getLocationList() {
         return locationList;
     }
 
-    public HashMap<String, Location> getLocationMap() {
+    public HashMap<String, String> getLocationMap() {
         return locationMap;
     }
 
