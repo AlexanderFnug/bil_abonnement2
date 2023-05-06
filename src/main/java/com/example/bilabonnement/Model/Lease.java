@@ -1,8 +1,5 @@
 package com.example.bilabonnement.Model;
 
-enum loc{
-    KBHJAGTVEJ, VALBY, ÅRHUS
-}
 public class Lease {
     private int leaseID;
     private Car car;
@@ -11,8 +8,8 @@ public class Lease {
     private String startDate; //Different datatype?
     private String endDate;
     private String returnDate;
-    private loc pickupLocation;
-    private loc returnLocation;
+    private Location pickupLocation;
+    private Location returnLocation;
     private int maxMileage;
     private double price;
 
@@ -72,28 +69,28 @@ public class Lease {
         this.returnDate = returnDate;
     }
 
+    public Location getPickupLocation() {
+        return pickupLocation;
+    }
+
+    public void setPickupLocation(Location pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+
+    public Location getReturnLocation() {
+        return returnLocation;
+    }
+
+    public void setReturnLocation(Location returnLocation) {
+        this.returnLocation = returnLocation;
+    }
+
     public int getMaxMileage() {
         return maxMileage;
     }
 
     public void setMaxMileage(int maxMileage) {
         this.maxMileage = maxMileage;
-    }
-
-    public loc getPickupLocation() {
-        return pickupLocation;
-    }
-
-    public void setPickupLocation(loc pickupLocation) {
-        this.pickupLocation = pickupLocation;
-    }
-
-    public loc getReturnLocation() {
-        return returnLocation;
-    }
-
-    public void setReturnLocation(loc returnLocation) {
-        this.returnLocation = returnLocation;
     }
 
     public double getPrice() {
