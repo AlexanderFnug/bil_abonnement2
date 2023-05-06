@@ -22,7 +22,7 @@ public class BasicInfoComponent {
     Service service;
 
     @PostConstruct
-    public void populate(){
+    public void populateLists(){
 //        locationList = service.fetchLocationsAsList();
 //        locationMap = service.fetchLocationsAsMap();
 //        employeePositionList = service.fetchEmployeePositionsAsList();

@@ -16,7 +16,7 @@ public class CarController {
         return "cardashboard.html";
     }
 
-    @GetMapping("/carModelList")
+    @GetMapping("/carModelDashboard")
     public String carModelDashboard(){
         return "carmodeldashboard.html";
     }
