@@ -2,14 +2,30 @@ package com.example.bilabonnement.Model;
 
 public class Lease {
     private int leaseID;
-    private Car car;
-    private Customer customer;
-    private Employee employee;
+    private int carID;
+    private int customerID;
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public int getLocationID() {
+        return locationID;
+    }
+
+    public void setLocationID(int locationID) {
+        this.locationID = locationID;
+    }
+
+    private int employeeID;
     private String startDate; //Different datatype?
     private String endDate;
     private String returnDate;
-    private Location pickupLocation;
-    private Location returnLocation;
+    private int locationID;
     private int maxMileage;
     private double price;
 
@@ -21,29 +37,25 @@ public class Lease {
         this.leaseID = leaseID;
     }
 
-    public Car getCar() {
-        return car;
+    public int getCarID() {
+        return carID;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCarID(int carID) {
+        this.carID = carID;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+
+
 
     public String getStartDate() {
         return startDate;
@@ -69,21 +81,13 @@ public class Lease {
         this.returnDate = returnDate;
     }
 
-    public Location getPickupLocation() {
-        return pickupLocation;
-    }
 
-    public void setPickupLocation(Location pickupLocation) {
-        this.pickupLocation = pickupLocation;
-    }
 
-    public Location getReturnLocation() {
-        return returnLocation;
-    }
 
-    public void setReturnLocation(Location returnLocation) {
-        this.returnLocation = returnLocation;
-    }
+
+
+
+
 
     public int getMaxMileage() {
         return maxMileage;

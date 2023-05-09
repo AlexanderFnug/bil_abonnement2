@@ -3,11 +3,12 @@ import com.example.bilabonnement.Component.BasicInfoComponent.Fuel;
 
 public class Car {
     private int carID;
-    private int modelID;
-    private int modelYear;
-    private String brandName;
-    private String modelName;
+    private int Year;
+
+    private String brand;
+    private String model;
     private int mileage;
+
     private int healthStatusID;
     private Fuel fuelType;
 
@@ -23,36 +24,30 @@ public class Car {
         this.carID = carID;
     }
 
-    public int getModelID() {
-        return modelID;
+
+
+    public int getYear() {
+        return Year;
     }
 
-    public void setModelID(int modelID) {
-        this.modelID = modelID;
+    public void setYear(int modelYear) {
+        this.Year = modelYear;
     }
 
-    public int getModelYear() {
-        return modelYear;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setModelYear(int modelYear) {
-        this.modelYear = modelYear;
+    public void setBrand(String brandName) {
+        this.brand = brandName;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getModel() {
+        return model;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
-
-    public String getModelName() {
-        return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public int getMileage() {

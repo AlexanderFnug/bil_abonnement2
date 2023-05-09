@@ -6,6 +6,15 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
+<div class="maincontainer">
+    <form method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input class="btn" type="submit" value="Add user" formaction="addUser">
+        <input class="btn" type="submit" value="Login" formaction="login">
+    </form>
+</div>
 
+<div style="color: red; text-align: center" th:text="${errorMsg}"></div>
 </body>
 </html>
