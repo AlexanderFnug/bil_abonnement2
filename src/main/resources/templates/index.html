@@ -6,12 +6,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 <body>
-<div class="maincontainer">
+<div class="container">
     <form method="post">
         <div class="container">
-            <input style="color: red" type="text" name="username" placeholder="Username">
+            <input type="text" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
-            <input class="btn" type="submit" value="Add user" formaction="addUser">
             <input class="btn" type="submit" value="Login" formaction="login">
         </div>
 

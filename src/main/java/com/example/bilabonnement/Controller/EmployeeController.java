@@ -1,6 +1,7 @@
 package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Model.Employee;
+import com.example.bilabonnement.Model.User;
 import com.example.bilabonnement.Service.Service;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+
+import java.util.List;
 
 @Controller
 public class EmployeeController {
@@ -54,8 +57,7 @@ public class EmployeeController {
             session.setAttribute("currentUser", tempEmp);
             return "redirect:/employeedashboard";
         }
-
-        return ("redirect:/");
+        return "redirect:/";
     }
 
     @PostMapping("/logout")

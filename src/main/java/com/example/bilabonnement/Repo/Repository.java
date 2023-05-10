@@ -1,4 +1,5 @@
 package com.example.bilabonnement.Repo;
+import com.example.bilabonnement.EmployeeMapper;
 import com.example.bilabonnement.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -61,8 +62,8 @@ public class Repository {
     //Fetch all
 
     public List<Employee> fetchAllEmployees() {
-        String sql = "SELECT * FROM Employee";
-        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
+        String sql = "SELECT employee_id, employee.user_id, password, position_id, salary, first_name, last_name, email, phone_number, address FROM Employee JOIN User ON Employee.user_id = User.user_id";
+        RowMapper<Employee> rowMapper = new EmployeeMapper();
         return db.query(sql, rowMapper);
     }
 
@@ -119,8 +120,8 @@ public class Repository {
     public Employee getEmployeeByID(int employeeID) {
         String sql = "SELECT * FROM employee WHERE employee_id = ?";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
-        Employee e = db.queryForObject(sql, rowMapper, employeeID);
-        return e;
+        Employee emp = db.queryForObject(sql, rowMapper, employeeID);
+        return emp;
     }
 
     public Car getCarByID(int carID) {

@@ -6,7 +6,7 @@ public class Employee extends User {
     private int positionID;
     private double salary;
 
-    public Employee() {
+    public Employee(){
         //Empty constructor
     }
 
