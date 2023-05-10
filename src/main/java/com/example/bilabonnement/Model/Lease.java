@@ -2,32 +2,47 @@ package com.example.bilabonnement.Model;
 
 public class Lease {
     private int leaseID;
-    private int carID;
-    private int customerID;
-
-    public int getEmployeeID() {
-        return employeeID;
-    }
-
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
-    }
-
-    public int getLocationID() {
-        return locationID;
-    }
-
-    public void setLocationID(int locationID) {
-        this.locationID = locationID;
-    }
-
-    private int employeeID;
+    private Car car;
+    private Customer customer;
+    private Employee employee;
     private String startDate; //Different datatype?
     private String endDate;
     private String returnDate;
-    private int locationID;
+    private String location;
     private int maxMileage;
     private double price;
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public int getLeaseID() {
         return leaseID;
@@ -36,26 +51,6 @@ public class Lease {
     public void setLeaseID(int leaseID) {
         this.leaseID = leaseID;
     }
-
-    public int getCarID() {
-        return carID;
-    }
-
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
-
-    public void setCarID(int carID) {
-        this.carID = carID;
-    }
-
-
-
-
 
     public String getStartDate() {
         return startDate;

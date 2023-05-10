@@ -7,12 +7,28 @@ public class DamageReport {
     private int reportID;
     private String damageDescription = "";
     private int carHealthStatus;
-    private int customerID;
-    private int userID;
+    private Lease lease;
+    private Employee employee;
     private double damageCosts;
     private String accidentDate;
 
     private int carID;
+
+    public Lease getLease() {
+        return lease;
+    }
+
+    public void setLease(Lease lease) {
+        this.lease = lease;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     public int getCarID() {
         return carID;
@@ -63,22 +79,6 @@ public class DamageReport {
 
     public void setCarHealthStatus(int carHealthStatus) {
         this.carHealthStatus = carHealthStatus;
-    }
-
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public double getDamageCosts() {
