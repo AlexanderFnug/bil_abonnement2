@@ -12,11 +12,6 @@ public class UserController {
     @Autowired
     Service service;
 
-    @GetMapping("/")                //Login page
-    public String index(){
-        return "index.html";
-    }
-
     @PostMapping("/userDashboard")  //User dashboard
     public String userDashboard(){
         return "userdashboard.html";
@@ -39,16 +34,5 @@ public class UserController {
     @PostMapping("/editUser")
     public String editUser(){
         return ("redirect:/userform");
-    }
-
-    @PostMapping("/login")
-    public String login(HttpSession session){
-        return "redirect:/dashboard";
-    }
-
-    @PostMapping("/logout")
-    public String logout(HttpSession session){
-        session.invalidate();
-        return "redirect:/";
     }
 }

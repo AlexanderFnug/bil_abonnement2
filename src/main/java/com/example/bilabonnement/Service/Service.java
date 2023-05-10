@@ -29,12 +29,12 @@ public class Service {
     }
 
     public void addUser(User user) {
-        List<User> tempUserList = repo.fetchAllUsers();
-        for (User listUser : tempUserList) {
-            if (user.getEmail().equals(listUser.getEmail())) {
-                return;
-            }
-        }
+//        List<User> tempUserList = repo.fetchAllUsers();
+//        for (User listUser : tempUserList) {
+//            if (user.getEmail().equals(listUser.getEmail())) {
+//                return;
+//            }
+//        }
         repo.addUser(user);
     }
 
