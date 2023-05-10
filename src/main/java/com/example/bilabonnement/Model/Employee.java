@@ -1,10 +1,14 @@
 package com.example.bilabonnement.Model;
 
-public class Employee {
+public class Employee extends User {
     private int employeeID;
-    private String firstName;
-    private String lastName;
-    private int position; //String instead??
+    private String password; //Maybe shouldn't be saved in the model??
+    private int positionID;
+    private double salary;
+
+    public Employee() {
+        //Empty constructor
+    }
 
     public int getEmployeeID() {
         return employeeID;
@@ -14,28 +18,20 @@ public class Employee {
         this.employeeID = employeeID;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getPassword() {
+        return password;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getPositionID() {
+        return positionID;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
+    public void setPositionID(int positionID) {
+        this.positionID = positionID;
     }
 
     public double getSalary() {
@@ -45,6 +41,4 @@ public class Employee {
     public void setSalary(double salary) {
         this.salary = salary;
     }
-
-    private double salary;
 }

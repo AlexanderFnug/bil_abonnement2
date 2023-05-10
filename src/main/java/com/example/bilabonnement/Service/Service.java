@@ -1,8 +1,7 @@
 package com.example.bilabonnement.Service;
 
-
 import com.example.bilabonnement.Model.*;
-import com.example.bilabonnement.Repo.Repo;
+import com.example.bilabonnement.Repo.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -11,9 +10,19 @@ import java.util.List;
 public class Service {
 
     @Autowired
-    Repo repo;
+    Repository repo;
 
-        //add Methods
+    public Integer userVerification(Employee employee) {
+        List<Employee> tempEmployeeList = repo.fetchAllEmployees();
+        for (Employee listEmp : tempEmployeeList) {
+            if (employee.getEmail().equals(listEmp.getEmail()) && employee.getPassword().equals(listEmp.getPassword())) {
+                return listEmp.getUserID();
+            }
+        }
+        return null;
+    }
+
+    //add Methods
 
     public void addEmployee(Employee employee) {
         repo.addEmployee(employee);
@@ -27,6 +36,10 @@ public class Service {
         repo.addCar(car);
     }
 
+    public void addCarModel(CarModel carModel) {
+        repo.addCarModel(carModel);
+    }
+
     public void addDamageReport(DamageReport damageReport) {
         repo.addDamageReport(damageReport);
     }
@@ -35,11 +48,19 @@ public class Service {
         repo.addLease(lease);
     }
 
-    public void addCustomer(Customer customer) {
-        repo.addCustomer(customer);
+    public void addLocation(String location) {
+        repo.addLocation(location);
     }
 
-        //Fetch all methods
+    public void addEmployeePosition(String position) {
+        repo.addEmployeePosition(position);
+    }
+
+    public void addFuelType(String fuelType) {
+        repo.addFuelType(fuelType);
+    }
+
+    //Fetch all methods
 
     public List<Employee> fetchAllEmployees() {
         return repo.fetchAllEmployees();
@@ -57,22 +78,18 @@ public class Service {
         return repo.fetchAllDamageReports();
     }
 
-    public List<Customer> fetchAllCustomers() {
-        return repo.fetchAllCustomers();
-    }
-
     public List<Car> fetchAllCars() {
         return repo.fetchAllCars();
     }
 
-        //Get by ID methods
+    public List<CarModel> fetchAllCarModels() {
+        return repo.fetchAllCarModels();
+    }
+
+    //Get by ID methods
 
     public Employee getEmployeeByID(int employeeID) {
         return repo.getEmployeeByID(employeeID);
-    }
-
-    public Customer getCustomerByID(int customerID) {
-        return repo.getCustomerByID(customerID);
     }
 
     public Car getCarByID(int carID) {
@@ -90,79 +107,45 @@ public class Service {
     public User getUserByID(int userID) {
         return repo.getUserByID(userID);
     }
-    public void deleteDamageReportByID(int damageReportID) throws ServiceException {
-        try {
-            repo.deleteDamageReportByID(damageReportID);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to delete damage report with ID " + damageReportID, e);
-        }
+
+    public void deleteDamageReportByID(int damageReportID) {
+        repo.deleteDamageReportByID(damageReportID);
     }
 
-    public void deleteEmployeeByID(int employeeID) throws ServiceException {
-        try {
-            repo.deleteEmployeeByID(employeeID);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to delete employee with ID " + employeeID, e);
-        }
+    public void deleteEmployeeByID(int employeeID) {
+        repo.deleteEmployeeByID(employeeID);
     }
 
-    public void deleteLeaseByID(int leaseID) throws ServiceException {
-        try {
-            repo.deleteLeaseByID(leaseID);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to delete lease with ID " + leaseID, e);
-        }
+    public void deleteLeaseByID(int leaseID) {
+        repo.deleteLeaseByID(leaseID);
     }
 
-    public void deleteCustomerByID(int customerID) throws ServiceException {
-        try {
-            repo.deleteCustomerByID(customerID);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to delete customer with ID " + customerID, e);
-        }
+    public void deleteCustomerByID(int customerID) {
+        repo.deleteCustomerByID(customerID);
     }
 
-    public void deleteCarByID(int carID) throws ServiceException {
-        try {
-            repo.deleteCarByID(carID);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to delete car with ID " + carID, e);
-        }
+    public void deleteCarByID(int carID) {
+        repo.deleteCarByID(carID);
     }
 
-    public void updateUser(User user)  {
-
-            repo.updateUser(user);
-
+    public void updateUser(User user) {
+        repo.updateUser(user);
     }
 
     public void updateLease(Lease lease) {
-
-            repo.updateLease(lease);
+        repo.updateLease(lease);
     }
 
-    public void updateCustomer(Customer customer) throws ServiceException {
-
-            repo.updateCustomer(customer);
-
+    public void updateEmployee(Employee employee) {
+        repo.updateEmployee(employee);
     }
 
-    public void updateEmployee(Employee employee) throws ServiceException {
-
-            repo.updateEmployee(employee);
-
+    public void updateDamageReport(DamageReport damageReport) {
+        repo.updateDamageReport(damageReport);
     }
 
-    public void updateDamageReport(DamageReport damageReport) throws ServiceException {
-
-            repo.updateDamageReport(damageReport);
-
-    }
-
-    public void updateCar(Car car) throws ServiceException {
-
-            repo.updateCar(car);
-
+    public void updateCar(Car car) {
+        repo.updateCar(car);
     }
 
 }

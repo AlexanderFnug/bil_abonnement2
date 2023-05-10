@@ -3,39 +3,16 @@ package com.example.bilabonnement.Model;
 import java.util.Date;
 
 public class DamageReport {
-
     private int reportID;
-    private String damageDescription = "";
-    private int carHealthStatus;
-    private Lease lease;
-    private Employee employee;
-    private double damageCosts;
-    private String accidentDate;
+    private String description;
+    private int leaseID;
+    private int employeeID;
+    private double cost;
+    private String dateAccident;
+    private String dateReport;
 
-    private int carID;
-
-    public Lease getLease() {
-        return lease;
-    }
-
-    public void setLease(Lease lease) {
-        this.lease = lease;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public int getCarID() {
-        return carID;
-    }
-
-    public void setCarID(int carID) {
-        this.carID = carID;
+    public DamageReport() {
+        //Empty constructor
     }
 
     public int getReportID() {
@@ -46,46 +23,51 @@ public class DamageReport {
         this.reportID = reportID;
     }
 
-    public String getAccidentDate() {
-        return accidentDate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAccidentDate(String accidentDate) {
-        this.accidentDate = accidentDate;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getReportDate() {
-        return reportDate;
+    public int getLeaseID() {
+        return leaseID;
     }
 
-    public void setReportDate(String reportDate) {
-        this.reportDate = reportDate;
+    public void setLeaseID(int leaseID) {
+        this.leaseID = leaseID;
     }
 
-    private String reportDate;
-
-    public String getDamageDescription() {
-        return damageDescription;
+    public int getEmployeeID() {
+        return employeeID;
     }
 
-
-    public void setDamageDescription(String damageDescription) {
-        this.damageDescription = damageDescription;
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
     }
 
-    public int getCarHealthStatus() {
-        return carHealthStatus;
+    public double getCost() {
+        return cost;
     }
 
-    public void setCarHealthStatus(int carHealthStatus) {
-        this.carHealthStatus = carHealthStatus;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
-    public double getDamageCosts() {
-        return damageCosts;
+    public String getDateAccident() {
+        return dateAccident;
     }
 
-    public void setDamageCosts(double damageCosts) {
-        this.damageCosts = damageCosts;
+    public void setDateAccident(String dateAccident) {
+        this.dateAccident = dateAccident;
+    }
+
+    public String getDateReport() {
+        return dateReport;
+    }
+
+    public void setDateReport(String dateReport) {
+        this.dateReport = dateReport;
     }
 }

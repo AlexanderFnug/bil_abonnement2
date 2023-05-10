@@ -12,10 +12,10 @@ public class BasicInfoComponent {
     private List<String> locationList;
     private HashMap<String, String> locationMap;
     private List<String> employeePositionList;
-    private List<String> carHealthStatusList;
+    private List<String> fuelTypeList;
 
-    public enum Fuel {
-        BENZENE, DIESEL, GASOLINE, ELECTRIC
+    public enum CarHealthStatus {
+        FINE, PARTIALLY_DAMAGED, HEAVILY_DAMAGED, COMPLETELY_DAMAGED
     }
 
     @Autowired
@@ -26,7 +26,7 @@ public class BasicInfoComponent {
 //        locationList = service.fetchLocationsAsList();
 //        locationMap = service.fetchLocationsAsMap();
 //        employeePositionList = service.fetchEmployeePositionsAsList();
-//        carHealthStatusList = service.fetchCarHealthStatusAsList();
+//        fuelTypeList = service.fetchFuelTypesAsList();
     }
 
     public List<String> getLocationList() {
@@ -41,7 +41,7 @@ public class BasicInfoComponent {
         return employeePositionList;
     }
 
-    public List<String> getCarHealthStatusList() {
-        return carHealthStatusList;
+    public List<String> getFuelTypeList() {
+        return fuelTypeList;
     }
 }

@@ -2,46 +2,19 @@ package com.example.bilabonnement.Model;
 
 public class Lease {
     private int leaseID;
-    private Car car;
-    private Customer customer;
-    private Employee employee;
-    private String startDate; //Different datatype?
-    private String endDate;
-    private String returnDate;
-    private String location;
+    private int carID;
+    private int userID;
+    private int employeeID;
+    private String dateStart; //Different datatype?
+    private String dateEnd;
+    private String dateReturn;
+    private String locationPickup;
+    private String locationReturn;
     private int maxMileage;
     private double price;
 
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public Lease() {
+        //Empty constructor
     }
 
     public int getLeaseID() {
@@ -52,37 +25,69 @@ public class Lease {
         this.leaseID = leaseID;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public int getCarID() {
+        return carID;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setCarID(int carID) {
+        this.carID = carID;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
-    public String getReturnDate() {
-        return returnDate;
+    public int getEmployeeID() {
+        return employeeID;
     }
 
-    public void setReturnDate(String returnDate) {
-        this.returnDate = returnDate;
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
     }
 
+    public String getDateStart() {
+        return dateStart;
+    }
 
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
+    }
 
+    public String getDateEnd() {
+        return dateEnd;
+    }
 
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
+    }
 
+    public String getDateReturn() {
+        return dateReturn;
+    }
 
+    public void setDateReturn(String dateReturn) {
+        this.dateReturn = dateReturn;
+    }
 
+    public String getLocationPickup() {
+        return locationPickup;
+    }
 
+    public void setLocationPickup(String locationPickup) {
+        this.locationPickup = locationPickup;
+    }
+
+    public String getLocationReturn() {
+        return locationReturn;
+    }
+
+    public void setLocationReturn(String locationReturn) {
+        this.locationReturn = locationReturn;
+    }
 
     public int getMaxMileage() {
         return maxMileage;
