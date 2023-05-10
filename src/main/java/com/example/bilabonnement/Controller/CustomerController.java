@@ -13,26 +13,31 @@ public class CustomerController {
 
     @GetMapping("/customerDashboard")
     public String customerDashboard(){
+
         return "customerdashboard.html";
     }
 
     @GetMapping("/customerForm")
     public String customerForm(){
+
         return "customerform.html";
     }
 
     @PostMapping("/addCustomer")
     public String addCustomer(){
+
         return "redirect:/customerdashboard";
     }
 
     @PostMapping("/removeCustomer")
     public String removeCustomer(){
+
         return "redirect:/customerdashboard";
     }
 
     @PostMapping("/editCustomer")
     public String editCustomer(){
+
         return "redirect:/customerform";
     }
 }
