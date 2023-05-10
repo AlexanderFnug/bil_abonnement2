@@ -9,8 +9,8 @@ import java.util.List;
 
 @Component
 public class BasicInfoComponent {
-    private List<Location> locationList;
-    private HashMap<String, Location> locationMap;
+    private List<String> locationList;
+    private HashMap<String, String> locationMap;
     private List<String> employeePositionList;
     private List<String> carHealthStatusList;
 
@@ -22,18 +22,18 @@ public class BasicInfoComponent {
     Service service;
 
     @PostConstruct
-    public void populate(){
+    public void populateLists(){
 //        locationList = service.fetchLocationsAsList();
 //        locationMap = service.fetchLocationsAsMap();
 //        employeePositionList = service.fetchEmployeePositionsAsList();
 //        carHealthStatusList = service.fetchCarHealthStatusAsList();
     }
 
-    public List<Location> getLocationList() {
+    public List<String> getLocationList() {
         return locationList;
     }
 
-    public HashMap<String, Location> getLocationMap() {
+    public HashMap<String, String> getLocationMap() {
         return locationMap;
     }
 
