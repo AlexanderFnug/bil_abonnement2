@@ -16,7 +16,7 @@ public class Service {
         List<Employee> tempEmployeeList = repo.fetchAllEmployees();
         for (Employee listEmp : tempEmployeeList) {
             if (employee.getEmail().equals(listEmp.getEmail()) && employee.getPassword().equals(listEmp.getPassword())) {
-                return listEmp.getUserID();
+                return listEmp.getEmployeeID();
             }
         }
         return null;
