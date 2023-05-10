@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>INTERNAL - BilAbonnement.dk</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 <body>
 <div class="maincontainer">
     <form method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input class="btn" type="submit" value="Add user" formaction="addUser">
-        <input class="btn" type="submit" value="Login" formaction="login">
+        <div class="container">
+            <input style="color: red" type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input class="btn" type="submit" value="Add user" formaction="addUser">
+            <input class="btn" type="submit" value="Login" formaction="login">
+        </div>
+
     </form>
 </div>
 

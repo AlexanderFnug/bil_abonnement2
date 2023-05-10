@@ -38,12 +38,12 @@ public class Repo {
     public void addDamageReport(DamageReport damageReport){
         String sql = "INSERT INTO damage_reports (carID, description, cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         db.update(sql, damageReport.getCarID(), damageReport.getDamageDescription(), damageReport.getDamageCosts(),
-                damageReport.getReportDate(), damageReport.getAccidentDate(), damageReport.getUserID(), damageReport.getCarHealthStatus(), damageReport.getCustomerID());
+                damageReport.getReportDate(), damageReport.getAccidentDate(), damageReport.getCarHealthStatus());
     }
     public void addLease(Lease lease){
         String sql = "INSERT INTO leases () VALUES (?, ?, ?, ?, ?)";
-        db.update(sql, lease.getCarID(), lease.getCustomerID(), lease.getEmployeeID(), lease.getEndDate(),
-                lease.getMaxMileage(), lease.getLocationID(), lease.getPrice(), lease.getReturnDate(),
+        db.update(sql,  lease.getEndDate(),
+                lease.getMaxMileage(), lease.getPrice(), lease.getReturnDate(),
                 lease.getStartDate());
     }
     public void addCustomer(Customer customer){
@@ -158,8 +158,8 @@ public class Repo {
 
     public void updateLease(Lease lease){
         String sql = "UPDATE leases WHERE leaseID = ?";
-        db.update(sql, lease.getCarID(), lease.getCustomerID(), lease.getEmployeeID(), lease.getEndDate(),
-                lease.getMaxMileage(), lease.getLocationID(), lease.getPrice(), lease.getReturnDate(),
+        db.update(sql,  lease.getEndDate(),
+                lease.getMaxMileage(),  lease.getPrice(), lease.getReturnDate(),
                 lease.getStartDate());
     }
     public void updateCustomer(Customer customer){
@@ -183,8 +183,8 @@ public class Repo {
         String sql = "UPDATE damage_reports SET carID = ?, description = ?, cost = ?, reportDate = ?, accidentDate = ?, " +
                 "userID = ?, carHealthStatus = ?, customerID = ? WHERE reportID = ?";
         db.update(sql, damageReport.getCarID(), damageReport.getDamageDescription(), damageReport.getDamageCosts(),
-                damageReport.getReportDate(), damageReport.getAccidentDate(), damageReport.getUser(),
-                damageReport.getCarHealthStatus(), damageReport.getCustomer(), damageReport.getReportID());
+                damageReport.getReportDate(), damageReport.getAccidentDate(),
+                damageReport.getCarHealthStatus(),  damageReport.getReportID());
     }
 
     public void updateCar(Car car){
