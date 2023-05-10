@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class BasicInfoComponent {
     private List<String> locationList;
-    private HashMap<String, String> locationMap;
+//    private HashMap<String, String> locationMap;
     private List<String> employeePositionList;
     private List<String> fuelTypeList;
 
@@ -23,19 +23,19 @@ public class BasicInfoComponent {
 
     @PostConstruct
     public void populateLists(){
-//        locationList = service.fetchLocationsAsList();
+        locationList = service.fetchAllLocations();
 //        locationMap = service.fetchLocationsAsMap();
-//        employeePositionList = service.fetchEmployeePositionsAsList();
-//        fuelTypeList = service.fetchFuelTypesAsList();
+        employeePositionList = service.fetchEmployeePositions();
+        fuelTypeList = service.fetchAllFuelTypes();
     }
 
     public List<String> getLocationList() {
         return locationList;
     }
 
-    public HashMap<String, String> getLocationMap() {
-        return locationMap;
-    }
+//    public HashMap<String, String> getLocationMap() {
+//        return locationMap;
+//    }
 
     public List<String> getEmployeePositionList() {
         return employeePositionList;

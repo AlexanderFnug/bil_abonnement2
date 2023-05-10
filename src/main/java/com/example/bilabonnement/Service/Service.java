@@ -29,6 +29,12 @@ public class Service {
     }
 
     public void addUser(User user) {
+        List<User> tempUserList = repo.fetchAllUsers();
+        for (User listUser : tempUserList) {
+            if (user.getEmail().equals(listUser.getEmail())) {
+                return;
+            }
+        }
         repo.addUser(user);
     }
 
@@ -84,6 +90,18 @@ public class Service {
 
     public List<CarModel> fetchAllCarModels() {
         return repo.fetchAllCarModels();
+    }
+
+    public List<String> fetchAllLocations() {
+        return repo.fetchAllLocations();
+    }
+
+    public List<String> fetchAllFuelTypes() {
+        return repo.fetchAllFuelTypes();
+    }
+
+    public List<String> fetchEmployeePositions() {
+        return repo.fetchAllEmployeePositions();
     }
 
     //Get by ID methods
