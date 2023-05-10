@@ -1,5 +1,4 @@
 package com.example.bilabonnement.Component;
-import com.example.bilabonnement.Model.Location;
 import com.example.bilabonnement.Service.Service;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;

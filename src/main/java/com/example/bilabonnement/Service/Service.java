@@ -130,54 +130,39 @@ public class Service {
         }
     }
 
-    public void updateUser(User user) throws ServiceException {
-        try {
+    public void updateUser(User user)  {
+
             repo.updateUser(user);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to update user with ID " + user.getUserID(), e);
-        }
+
     }
 
-    public void updateLease(Lease lease) throws ServiceException {
-        try {
+    public void updateLease(Lease lease) {
+
             repo.updateLease(lease);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to update lease with ID " + lease.getLeaseID(), e);
-        }
     }
 
     public void updateCustomer(Customer customer) throws ServiceException {
-        try {
+
             repo.updateCustomer(customer);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to update customer with ID " + customer.getCustomerID(), e);
-        }
+
     }
 
     public void updateEmployee(Employee employee) throws ServiceException {
-        try {
+
             repo.updateEmployee(employee);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to update employee with ID " + employee.getEmployeeID(), e);
-        }
+
     }
 
     public void updateDamageReport(DamageReport damageReport) throws ServiceException {
-        try {
+
             repo.updateDamageReport(damageReport);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to update damage report with ID " + damageReport.getReportID(), e);
-        }
+
     }
 
     public void updateCar(Car car) throws ServiceException {
-        try {
+
             repo.updateCar(car);
-        } catch (RepositoryException e) {
-            throw new ServiceException("Failed to update car with ID " + car.getCarID(), e);
-        }
+
     }
-
-
 
 }

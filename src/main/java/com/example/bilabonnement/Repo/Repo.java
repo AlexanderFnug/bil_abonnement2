@@ -31,26 +31,25 @@ public class Repo {
         db.update(sql, user.getUsername(), user.getPassword());
     }
     public void addCar(Car car){
-        String sql = "INSERT INTO cars (make, model, year, color, mileage) VALUES (?, ?, ?, ?, ?)";
-        db.update(sql, car.getBrand(), car.getModel(), car.getYear(), car.getCarID(), car.getMileage(),
+        String sql = "INSERT INTO cars (make, model, year, color, mileage) VALUES (?, ?, ?, ?, ?, ?)";
+        db.update(sql, car.getBrand(), car.getModel(), car.getYear(), car.getMileage(),
                 car.getFuelType(), car.getHealthStatusID());
     }
     public void addDamageReport(DamageReport damageReport){
-        String sql = "INSERT INTO damage_reports (carID, description, cost) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO damage_reports (carID, description, cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         db.update(sql, damageReport.getCarID(), damageReport.getDamageDescription(), damageReport.getDamageCosts(),
-                damageReport.getReportDate(), damageReport.getAccidentDate(), damageReport.getUserID(),
-                damageReport.getReportID(), damageReport.getCarHealthStatus(), damageReport.getCustomerID());
+                damageReport.getReportDate(), damageReport.getAccidentDate(), damageReport.getUserID(), damageReport.getCarHealthStatus(), damageReport.getCustomerID());
     }
     public void addLease(Lease lease){
-        String sql = "INSERT INTO leases (carID, customerID, startDate, endDate, monthlyRate) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO leases () VALUES (?, ?, ?, ?, ?)";
         db.update(sql, lease.getCarID(), lease.getCustomerID(), lease.getEmployeeID(), lease.getEndDate(),
                 lease.getMaxMileage(), lease.getLocationID(), lease.getPrice(), lease.getReturnDate(),
                 lease.getStartDate());
     }
     public void addCustomer(Customer customer){
-        String sql = "INSERT INTO customers (firstName, lastName, phone, email) VALUES (?, ?, ?, ?)";
-        db.update(sql, customer.getFirstName(), customer.getLastName(), customer.getCustomerID(), customer.getEmail(),
-                customer.getPhoneNumber(), customer.getAddress());
+        String sql = "INSERT INTO customers (firstName, lastName, phone, email, address) VALUES (?, ?, ?, ?)";
+        db.update(sql, customer.getFirstName(), customer.getLastName(),
+                customer.getPhoneNumber(), customer.getEmail(), customer.getAddress());
     }
 
         //Fetch all
@@ -181,14 +180,16 @@ public class Repo {
     }
 
     public void updateDamageReport(DamageReport damageReport){
-        String sql = "UPDATE damage_reports SET carID = ?, description = ?, cost = ?, reportDate = ?, accidentDate = ?, userID = ?, carHealthStatus = ?, customerID = ? WHERE reportID = ?";
+        String sql = "UPDATE damage_reports SET carID = ?, description = ?, cost = ?, reportDate = ?, accidentDate = ?, " +
+                "userID = ?, carHealthStatus = ?, customerID = ? WHERE reportID = ?";
         db.update(sql, damageReport.getCarID(), damageReport.getDamageDescription(), damageReport.getDamageCosts(),
-                damageReport.getReportDate(), damageReport.getAccidentDate(), damageReport.getUserID(),
-                damageReport.getCarHealthStatus(), damageReport.getCustomerID(), damageReport.getReportID());
+                damageReport.getReportDate(), damageReport.getAccidentDate(), damageReport.getUser(),
+                damageReport.getCarHealthStatus(), damageReport.getCustomer(), damageReport.getReportID());
     }
 
     public void updateCar(Car car){
-        String sql = "UPDATE cars SET make = ?, model = ?, year = ?, color = ?, mileage = ?, fuelType = ?, healthStatusID = ? WHERE carID = ?";
+        String sql = "UPDATE cars SET make = ?, model = ?, year = ?, color = ?, mileage = ?, fuelType = ?, " +
+                "healthStatusID = ? WHERE carID = ?";
         db.update(sql, car.getBrand(), car.getModel(), car.getYear(), car.getCarID(), car.getMileage(),
                 car.getFuelType(), car.getHealthStatusID(), car.getCarID());
     }
