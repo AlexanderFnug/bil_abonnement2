@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Employee Dashboard</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 <body>
 <div class="container">
-    <form method="post">
+    <form method="get">
 
-        <input class="btn" type="submit" value="Lease" formaction="leaseForm">
-        <input class="btn" type="submit" value="Business analysis" formaction="businessAnalysis">
-        <input class="btn" type="submit" value="Damage report" formaction="DamageReport">
+        <input class="btn" type="submit" value="Lease" formaction="leaseDashboard">
+        <input class="btn" type="submit" value="Business analysis" formaction="carDashboard">
+        <input class="btn" type="submit" value="Damage report" formaction="damageReportDashboard">
     </form>
 </div>
 </body>

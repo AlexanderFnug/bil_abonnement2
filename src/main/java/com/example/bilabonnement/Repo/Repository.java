@@ -62,7 +62,8 @@ public class Repository {
     //Fetch all
 
     public List<Employee> fetchAllEmployees() {
-        String sql = "SELECT employee_id, employee.user_id, password, position_id, salary, first_name, last_name, email, phone_number, address FROM Employee JOIN User ON Employee.user_id = User.user_id";
+        String sql = "SELECT employee_id, employee.user_id, password, position_id, salary, first_name, last_name, " +
+                "email, phone_number, address FROM Employee JOIN User ON Employee.user_id = User.user_id";
         RowMapper<Employee> rowMapper = new EmployeeMapper();
         return db.query(sql, rowMapper);
     }

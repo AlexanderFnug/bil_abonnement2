@@ -52,12 +52,22 @@ public class EmployeeController {
         loginInfo.setEmail(wr.getParameter("email"));
         loginInfo.setPassword(wr.getParameter("password"));
         Integer tempUserID = service.userVerification(loginInfo);
-        if (tempUserID != null){
+        if (tempUserID != null) {
+            System.out.println("yay");
             Employee tempEmp = service.getEmployeeByID(tempUserID);
             session.setAttribute("currentUser", tempEmp);
             return "redirect:/employeedashboard";
         }
+        else
         return "redirect:/";
+    }
+    @GetMapping("/employeedashboard")
+    public String index(HttpSession session){
+        if (session.getAttribute("currentUser") != null){
+            return "/employeedashboard";
+        }
+        else
+        return "/index";
     }
 
     @PostMapping("/logout")

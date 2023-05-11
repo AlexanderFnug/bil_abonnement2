@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="maincontainer">
+    <form method="post">
+        <input style="background-color: darkred" class="btn2" type="submit" value="Logout" formaction="logout">
+    </form>
+    <div class="header">Damage Report</div>
+    <form method="get" class="input-form">
+        <input class="btn2" type="submit" value=" + Add damage report" formaction="addDamageReport">
+    </form>
+</div>
+<div class="row" th:each="damageReport, iteration :  ${damageReports}">
+    DamageReport #<span class="rowItem" th:text="${iteration.count}"/>
+    <form method="get">
+        <input class="btn" type="submit" value="Edit" formaction="editDamageReport">
+        <input class="btn" type="submit" value="Delete" formaction="deleteDamageReport">
+        <input type="hidden" name="id" th:value="${damageReport.damageReportID}">
+    </form>
+</div>
+</body>
+</html>
