@@ -14,8 +14,8 @@ public class Service {
 
     public Integer userVerification(Employee employee) {
         List<Employee> tempEmployeeList = repo.fetchAllEmployees();
-        System.out.println("user mail: "+ employee.getEmail());
-        System.out.println("user passW: "+employee.getPassword());
+        System.out.println("user list: "+ tempEmployeeList);
+
         for (Employee listEmp : tempEmployeeList) {
             System.out.println("------");
             System.out.println("user mail: "+ listEmp.getEmail());

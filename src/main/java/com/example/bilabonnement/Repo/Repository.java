@@ -56,8 +56,9 @@ public class Repository {
     }
 
     public void addDamageReport(DamageReport report) {
-        String sql = "INSERT INTO CarDamageReport (description, date_accident, date_report, lease_id, employee_id, cost) VALUES (?, ?, ?, ? ,? ,?)";
-        db.update(sql, report.getDescription(), report.getDateAccident(), report.getDateReport(), report.getLeaseID(), report.getEmployeeID(), report.getCost());
+        String sql = "INSERT INTO DamageReport (description, lease_id, employee_id,  cost, date_accident, date_report) VALUES (?, ?, ?, ? ,? ,?)";
+        db.update(sql, report.getDescription(), report.getLeaseID(), report.getEmployeeID(), report.getCost(),
+                report.getDateAccident(), report.getDateReport());
     }
     //Fetch all
 
@@ -81,7 +82,7 @@ public class Repository {
     }
 
     public List<DamageReport> fetchAllDamageReports() {
-        String sql = "SELECT * FROM CarDamageReport";
+        String sql = "SELECT * FROM DamageReport";
         RowMapper<DamageReport> rowMapper = new BeanPropertyRowMapper<>(DamageReport.class);
         return db.query(sql, rowMapper);
     }
