@@ -1,15 +1,17 @@
 package com.example.bilabonnement.Model;
 
+import java.util.Date;
+
 public class Lease {
     private int leaseID;
     private int carID;
     private int userID;
     private int employeeID;
-    private String dateStart; //Different datatype?
+    private String dateStart;
     private String dateEnd;
     private String dateReturn;
-    private String locationPickup;
-    private String locationReturn;
+    private int locationPickupID;
+    private int locationReturnID;
     private int maxMileage;
     private double price;
 
@@ -73,20 +75,20 @@ public class Lease {
         this.dateReturn = dateReturn;
     }
 
-    public String getLocationPickup() {
-        return locationPickup;
+    public int getLocationPickupID() {
+        return locationPickupID;
     }
 
-    public void setLocationPickup(String locationPickup) {
-        this.locationPickup = locationPickup;
+    public void setLocationPickupID(int locationPickupID) {
+        this.locationPickupID = locationPickupID;
     }
 
-    public String getLocationReturn() {
-        return locationReturn;
+    public int getLocationReturnID() {
+        return locationReturnID;
     }
 
-    public void setLocationReturn(String locationReturn) {
-        this.locationReturn = locationReturn;
+    public void setLocationReturnID(int locationReturnID) {
+        this.locationReturnID = locationReturnID;
     }
 
     public int getMaxMileage() {

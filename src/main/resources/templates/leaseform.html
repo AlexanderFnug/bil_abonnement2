@@ -6,6 +6,45 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
+<div class="main-container">
+    <form method="post">
+        <div class="container">
+            <!--            <select>-->
+            <!--                <option name="car">-->
+            <!--                <option th:each="car : ${leaseableCarList}" th:text="${car.}"></option>-->
+            <!--            </select>-->
+            Customer
+            <select name="user">
+                <option th:each="user : ${userList}" th:value="${user.userID}" th:text="${user.firstName}"></option>
+            </select>
+            Employee
+            <select name="employee">
+                <option th:each="employee : ${employeeList}" th:value="${employee.employeeID}" th:text="${employee.firstName}"></option>
+            </select>
+            Current date
+            <span th:with="currentDate=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                <input type="text" name="startDate" th:value="${currentDate}">
+            </span>
+            End date
+            <input type="text" name="endDate" th:value="${endDate}">
+            Return date
+            <input type="text" name="returnDate" placeholder="YYYY-MM-DD">
+            Pickup location
+            <select name="locationPickup">
+                <option th:each="location, index : ${locationList}" th:value="${index}" th:text="${location}"></option>
+            </select>
+            Return location
+            <select name="locationReturn">
+                <option th:each="location, index : ${locationList}" th:value="${index}" th:text="${location}"></option>
+            </select>
+            Max mileage
+            <input type="number" name="maxMileage">
+            Price
+            <input type="number" name="price">
+            <input class="btn" type="submit" value="Add lease" formaction="addLease">
+        </div>
 
+    </form>
+</div>
 </body>
 </html>
