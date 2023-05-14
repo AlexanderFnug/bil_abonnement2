@@ -31,16 +31,22 @@ public class DamageReportController {
     }
 
 
-    @PostMapping("/removeDamageReport")
-    public String removeDamageReport(){
-
-        return "redirect:/customerdashboard";
+    @PostMapping("/deleteDamageReport")
+    public String deleteDamageReport(WebRequest wr){
+        System.out.println("reportID: "+wr.getParameter("reportID"));
+    service.deleteDamageReportByID(Integer.parseInt(wr.getParameter("reportID")));
+        return "redirect:/damageReportDashboard";
     }
 
     @PostMapping("/editDamageReport")
-    public String editDamageReport(){
+    public String editDamageReport(WebRequest wr, Model model){
+    int tempID = Integer.parseInt(wr.getParameter("reportID"));
+    DamageReport tempDam = service.getDamageReportByID(tempID);
+        System.out.println(tempDam.getDescription()+" Get description");
+        System.out.println(tempDam.getEmployeeID()+"emp ID");
+    model.addAttribute("damageReport", tempDam);
 
-        return "redirect:/damagereportform";
+        return "editdamagereport";
     }
     @GetMapping("/damageReportDashboard")
         public String getDamagereports(Model model, @ModelAttribute Employee employee, HttpSession session){
@@ -48,20 +54,20 @@ public class DamageReportController {
             model.addAttribute(tempEmp);
             List<DamageReport> damageReports = service.fetchAllDamageReports();
             model.addAttribute("damageReports", damageReports);
-        System.out.println(damageReports);
         return "damagereportdashboard.html";
     }
 
     @PostMapping("/addDamageReport")
     public String addDamageReport(@ModelAttribute DamageReport damageReport, WebRequest wr, HttpSession session) {
+        Employee tempEmp = (Employee) session.getAttribute("currentUser");
         damageReport.setDescription(wr.getParameter("description"));
         damageReport.setLeaseID(Integer.parseInt(wr.getParameter("lease_id")));
-        damageReport.setEmployeeID(Integer.parseInt(wr.getParameter("employee_id")));
+        damageReport.setEmployeeID(tempEmp.getEmployeeID());
         damageReport.setCost(Double.parseDouble(wr.getParameter("cost")));
         damageReport.setDateAccident(wr.getParameter("date_accident"));
         damageReport.setDateReport(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         service.addDamageReport(damageReport);
-        return "redirect:/damagereportDashboard";
+        return "redirect:/damageReportDashboard";
     }
 
 }

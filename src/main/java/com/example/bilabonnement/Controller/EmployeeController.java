@@ -53,7 +53,6 @@ public class EmployeeController {
         loginInfo.setPassword(wr.getParameter("password"));
         Integer tempUserID = service.userVerification(loginInfo);
         if (tempUserID != null) {
-            System.out.println("yay");
             Employee tempEmp = service.getEmployeeByID(tempUserID);
             session.setAttribute("currentUser", tempEmp);
             return "redirect:/employeedashboard";

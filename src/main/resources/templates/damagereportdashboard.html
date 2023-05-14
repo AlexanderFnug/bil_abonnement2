@@ -17,10 +17,10 @@
 <div class="row" th:each="damageReport, iteration :  ${damageReports}">
     DamageReport <span class="rowItem" th:text="${iteration.count}"/>. description
     <span class="rowItem" th:text="${damageReport.description}"/>
-    <form method="get">
+    <form method="post">
         <input class="btn" type="submit" value="Edit" formaction="editDamageReport">
         <input class="btn" type="submit" value="Delete" formaction="deleteDamageReport">
-
+        <input type="hidden" th:value="${damageReport.reportID}" name="reportID">
     </form>
 </div>
 

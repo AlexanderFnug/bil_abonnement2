@@ -2,10 +2,15 @@ package com.example.bilabonnement.Repo;
 import com.example.bilabonnement.EmployeeMapper;
 import com.example.bilabonnement.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Repository
@@ -82,10 +87,26 @@ public class Repository {
     }
 
     public List<DamageReport> fetchAllDamageReports() {
-        String sql = "SELECT * FROM DamageReport";
-        RowMapper<DamageReport> rowMapper = new BeanPropertyRowMapper<>(DamageReport.class);
-        return db.query(sql, rowMapper);
+        return db.query("SELECT * FROM DamageReport", new ResultSetExtractor<List<DamageReport>>() {
+            @Override
+            public List<DamageReport> extractData(ResultSet rs) throws SQLException, DataAccessException {
+                List<DamageReport> damageReports = new ArrayList<>();
+                while (rs.next()) {
+                    DamageReport damageReport = new DamageReport();
+                    damageReport.setReportID(rs.getInt("report_id"));
+                    damageReport.setDescription(rs.getString("description"));
+                    damageReport.setLeaseID(rs.getInt("lease_id"));
+                    damageReport.setEmployeeID(rs.getInt("employee_id"));
+                    damageReport.setCost(rs.getDouble("cost"));
+                    damageReport.setDateAccident(rs.getString("date_accident"));
+                    damageReport.setDateReport(rs.getString("date_report"));
+                    damageReports.add(damageReport);
+                }
+                return damageReports;
+            }
+        });
     }
+
 
     public List<Car> fetchAllCars() {
         String sql = "SELECT * FROM car";
@@ -134,7 +155,7 @@ public class Repository {
     }
 
     public DamageReport getDamageReportByID(int damageReportID) {
-        String sql = "SELECT * FROM CarDamageReport WHERE report_id = ?";
+        String sql = "SELECT * FROM DamageReport WHERE report_id = ?";
         RowMapper<DamageReport> rowMapper = new BeanPropertyRowMapper<>(DamageReport.class);
         DamageReport d = db.queryForObject(sql, rowMapper, damageReportID);
         return d;
@@ -158,7 +179,7 @@ public class Repository {
     //TODO: Needs to be updated. Will cause SQL exceptions !!
 
     public void deleteDamageReportByID(int damageReportID) { //removes one row from item database
-        String sql = "DELETE FROM damagereport WHERE damageReportID = ?";
+        String sql = "DELETE FROM DamageReport WHERE report_id = ?";
         db.update(sql, damageReportID);
     }
 
@@ -207,8 +228,8 @@ public class Repository {
     }
 
     public void updateDamageReport(DamageReport report) {
-        String sql = "UPDATE CarDamageReport SET description = ?, date_accident = ?, date_report = ?, lease_id = ?, employee_id = ?, cost = ? WHERE reportID = ?";
-        db.update(sql, report.getDescription(), report.getDateAccident(), report.getDateReport(), report.getLeaseID(), report.getEmployeeID(), report.getCost(), report.getReportID());
+        String sql = "UPDATE DamageReport SET description = ?, lease_id = ?, employee_id = ?, cost = ?, date_accident = ?, date_report = ? WHERE reportID = ?";
+        db.update(sql, report.getReportID(), report.getDescription(), report.getLeaseID(), report.getEmployeeID(), report.getCost(), report.getDateAccident(), report.getDateReport());
     }
 
     public void updateCar(Car car) {
