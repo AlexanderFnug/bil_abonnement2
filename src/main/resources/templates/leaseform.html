@@ -9,10 +9,10 @@
 <div class="main-container">
     <form method="post">
         <div class="container">
-            <!--            <select>-->
-            <!--                <option name="car">-->
-            <!--                <option th:each="car : ${leaseableCarList}" th:text="${car.}"></option>-->
-            <!--            </select>-->
+            Car
+            <select name="car">
+                <option th:each="car : ${carList}" th:value="${car.carID}" th:text="${car.modelName}"></option>
+            </select>
             Customer
             <select name="user">
                 <option th:each="user : ${userList}" th:value="${user.userID}" th:text="${user.firstName}"></option>
@@ -27,15 +27,13 @@
             </span>
             End date
             <input type="text" name="endDate" th:value="${endDate}">
-            Return date
-            <input type="text" name="returnDate" placeholder="YYYY-MM-DD">
             Pickup location
             <select name="locationPickup">
-                <option th:each="location, index : ${locationList}" th:value="${index}" th:text="${location}"></option>
+                <option th:each="location : ${locationList}" th:text="${location}"></option>
             </select>
             Return location
             <select name="locationReturn">
-                <option th:each="location, index : ${locationList}" th:value="${index}" th:text="${location}"></option>
+                <option th:each="location : ${locationList}" th:text="${location}"></option>
             </select>
             Max mileage
             <input type="number" name="maxMileage">

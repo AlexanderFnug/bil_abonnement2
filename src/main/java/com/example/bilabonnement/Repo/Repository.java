@@ -32,7 +32,7 @@ public class Repository {
 
     public void addCarModel(CarModel carModel) {
         String sql = "INSERT INTO CarModel (brand, name, fuel_type_id) VALUES (?, ?, ?)";
-        db.update(sql, carModel.getBrand(), carModel.getName(), carModel.getFuelType());
+        db.update(sql, carModel.getBrand(), carModel.getModelName(), carModel.getFuelTypeID());
     }
 
     public void addFuelType(String fuelType) {
@@ -87,7 +87,7 @@ public class Repository {
     }
 
     public List<Car> fetchAllCars() {
-        String sql = "SELECT * FROM car";
+        String sql = "SELECT car_id, car.model_id, mileage, year, status_id, carmodel.brand, carmodel.name, carmodel.fuel_type_id FROM car JOIN carmodel ON car.model_id = carmodel.model_id;";
         RowMapper<Car> rowMapper = new CarMapper();
         return db.query(sql, rowMapper);
     }

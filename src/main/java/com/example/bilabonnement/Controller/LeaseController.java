@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import java.text.DateFormat;
@@ -57,32 +58,28 @@ public class LeaseController {
 
     @PostMapping("/addLease")
     public String addLease(@ModelAttribute Lease lease, WebRequest wr){
-//        List<Lease> leaseList = service.fetchAllLeases();
-//        List<Car> carList = service.fetchAllCars();
-//        List<User> userList = service.fetchAllUsers();
-//        List<Employee> employeeList = service.fetchAllEmployees();
-//        List<String> locationList = service.fetchAllLocations();
         lease.setUserID(Integer.parseInt(wr.getParameter("user")));
-        System.out.println("333");
+        lease.setEmployeeID(Integer.parseInt(wr.getParameter("employee")));
         lease.setDateStart(wr.getParameter("startDate"));
         lease.setDateEnd(wr.getParameter("endDate"));
-        lease.setDateReturn(wr.getParameter("returnDate"));
-
-        //
-        Map<String, String[]> tempMap = wr.getParameterMap();
-        tempMap.remove("current");
-        tempMap.remove("count");
-        tempMap.remove("size");
-        System.out.println(tempMap.get("locationPickup"));
-        System.out.println(tempMap.get("locationReturn"));
-        lease.setLocationPickupID(Integer.parseInt(tempMap.get("locationPickup")[0])+1);
-        lease.setLocationReturnID(Integer.parseInt(tempMap.get("locationReturn")[0])+1);
-        System.out.println("555");
+        lease.setCarID(Integer.parseInt(wr.getParameter("car")));
         lease.setMaxMileage(Integer.parseInt(wr.getParameter("maxMileage")));
         lease.setPrice(Double.parseDouble(wr.getParameter("price")));
-        System.out.println("222");
+
+        //Ugly code to get location IDs
+        List<String> locationList = service.fetchAllLocations();
+        String tempPickup = wr.getParameter("locationPickup");
+        String tempReturn = wr.getParameter("locationReturn");
+        for (int i = 0; i < locationList.size(); i++) {
+            if (locationList.get(i).equals(tempPickup)){
+                lease.setLocationPickupID(i+1);
+            }
+            if (locationList.get(i).equals(tempReturn)){
+                lease.setLocationReturnID(i+1);
+            }
+        }
+
         service.addLease(lease);
-        System.out.println("222");
         return "leasedashboard.html";
     }
 

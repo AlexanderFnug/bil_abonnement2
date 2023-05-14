@@ -3,8 +3,8 @@ package com.example.bilabonnement.Model;
 public class CarModel {
     private int modelID;
     private String brand;
-    private String fuelType;
-    private String name;
+    private int fuelTypeID;
+    private String modelName;
 
     public CarModel() {
         //Empty constructor
@@ -26,19 +26,19 @@ public class CarModel {
         this.brand = brand;
     }
 
-    public String getFuelType() {
-        return fuelType;
+    public int getFuelTypeID() {
+        return fuelTypeID;
     }
 
-    public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
+    public void setFuelTypeID(int fuelTypeID) {
+        this.fuelTypeID = fuelTypeID;
     }
 
-    public String getName() {
-        return name;
+    public String getModelName() {
+        return modelName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }

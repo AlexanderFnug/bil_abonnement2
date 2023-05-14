@@ -1,6 +1,5 @@
 package com.example.bilabonnement.CustomMappers;
 
-import com.example.bilabonnement.Model.Car;
 import com.example.bilabonnement.Model.CarModel;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -11,8 +10,8 @@ public class CarModelMapper implements RowMapper<CarModel> {
     public CarModel mapRow(ResultSet rs, int rowNum) throws SQLException {
         CarModel carModel = new CarModel();
         carModel.setModelID(rs.getInt("model_id"));
-        carModel.setName(rs.getString("name"));
-        carModel.setFuelType(rs.getString("fuel_type"));
+        carModel.setModelName(rs.getString("name"));
+        carModel.setFuelTypeID(rs.getInt("fuel_type_id"));
         return carModel;
     }
 }
