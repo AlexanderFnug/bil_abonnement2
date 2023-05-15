@@ -1,11 +1,9 @@
 package com.example.bilabonnement.Repo;
-import com.example.bilabonnement.EmployeeMapper;
+import com.example.bilabonnement.CustomMappers.*;
 import com.example.bilabonnement.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -56,8 +54,8 @@ public class Repository {
     }
 
     public void addLease(Lease lease) {
-        String sql = "INSERT INTO leases (car_id, user_id, employee_id, date_start, date_end, date_return, location_pickup, location_return, max_mileage, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        db.update(sql, lease.getCarID(), lease.getUserID(), lease.getEmployeeID(), lease.getDateStart(), lease.getDateEnd(), lease.getDateReturn(), lease.getLocationPickup(), lease.getLocationReturn(), lease.getMaxMileage(), lease.getPrice());
+        String sql = "INSERT INTO lease (car_id, user_id, employee_id, date_start, date_end, date_return, location_pickup, location_return, max_mileage, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        db.update(sql, lease.getCarID(), lease.getUserID(), lease.getEmployeeID(), lease.getDateStart(), lease.getDateEnd(), lease.getDateReturn(), lease.getLocationPickupID(), lease.getLocationReturnID(), lease.getMaxMileage(), lease.getPrice());
     }
 
     public void addDamageReport(DamageReport report) {
@@ -76,66 +74,47 @@ public class Repository {
 
     public List<User> fetchAllUsers() {
         String sql = "SELECT * FROM User";
-        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
+        RowMapper<User> rowMapper = new UserMapper();
         return db.query(sql, rowMapper);
     }
 
     public List<Lease> fetchAllLeases() {
         String sql = "SELECT * FROM Lease";
-        RowMapper<Lease> rowMapper = new BeanPropertyRowMapper<>(Lease.class);
+        RowMapper<Lease> rowMapper = new LeaseMapper();
         return db.query(sql, rowMapper);
     }
 
     public List<DamageReport> fetchAllDamageReports() {
-        return db.query("SELECT * FROM DamageReport", new ResultSetExtractor<List<DamageReport>>() {
-            @Override
-            public List<DamageReport> extractData(ResultSet rs) throws SQLException, DataAccessException {
-                List<DamageReport> damageReports = new ArrayList<>();
-                while (rs.next()) {
-                    DamageReport damageReport = new DamageReport();
-                    damageReport.setReportID(rs.getInt("report_id"));
-                    damageReport.setDescription(rs.getString("description"));
-                    damageReport.setLeaseID(rs.getInt("lease_id"));
-                    damageReport.setEmployeeID(rs.getInt("employee_id"));
-                    damageReport.setCost(rs.getDouble("cost"));
-                    damageReport.setDateAccident(rs.getString("date_accident"));
-                    damageReport.setDateReport(rs.getString("date_report"));
-                    damageReports.add(damageReport);
-                }
-                return damageReports;
-            }
-        });
+        String sql = "SELECT * FROM CarDamageReport";
+        RowMapper<DamageReport> rowMapper = new DamageReportMapper();
+        return db.query(sql, rowMapper);
     }
-
 
     public List<Car> fetchAllCars() {
         String sql = "SELECT * FROM car";
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        RowMapper<Car> rowMapper = new CarMapper();
         return db.query(sql, rowMapper);
     }
 
     public List<CarModel> fetchAllCarModels() {
         String sql = "SELECT * FROM CarModel";
-        RowMapper<CarModel> rowMapper = new BeanPropertyRowMapper<>(CarModel.class);
+        RowMapper<CarModel> rowMapper = new CarModelMapper();
         return db.query(sql, rowMapper);
     }
 
     public List<String> fetchAllLocations() {
-        String sql = "SELECT * FROM Location";
-        RowMapper<String> rowMapper = new BeanPropertyRowMapper<>(String.class);
-        return db.query(sql, rowMapper);
+        String sql = "SELECT address FROM Location";
+        return db.queryForList(sql, String.class);
     }
 
     public List<String> fetchAllFuelTypes() {
-        String sql = "SELECT * FROM FuelType";
-        RowMapper<String> rowMapper = new BeanPropertyRowMapper<>(String.class);
-        return db.query(sql, rowMapper);
+        String sql = "SELECT fuel_type FROM FuelType";
+        return db.queryForList(sql, String.class);
     }
 
     public List<String> fetchAllEmployeePositions() {
-        String sql = "SELECT * FROM EmployeePosition";
-        RowMapper<String> rowMapper = new BeanPropertyRowMapper<>(String.class);
-        return db.query(sql, rowMapper);
+        String sql = "SELECT title FROM EmployeePosition";
+        return db.queryForList(sql, String.class);
     }
 
     //Getters by ID
@@ -213,8 +192,8 @@ public class Repository {
     public void updateLease(Lease lease) {
         String sql = "UPDATE Lease SET car_id = ?, user_id = ?, employee_id = ?, date_start = ?, date_end = ?, date_return = ?, location_pickup = ?, location_return = ?, max_mileage = ?, price = ? WHERE leaseID = ?";
         db.update(sql, lease.getCarID(), lease.getUserID(), lease.getEmployeeID(),
-                lease.getDateStart(), lease.getDateEnd(), lease.getDateReturn(), lease.getLocationPickup(),
-                lease.getLocationReturn(), lease.getMaxMileage(), lease.getPrice(), lease.getLeaseID());
+                lease.getDateStart(), lease.getDateEnd(), lease.getDateReturn(), lease.getLocationPickupID(),
+                lease.getLocationReturnID(), lease.getMaxMileage(), lease.getPrice(), lease.getLeaseID());
     }
 
     public void updateEmployee(Employee employee) {

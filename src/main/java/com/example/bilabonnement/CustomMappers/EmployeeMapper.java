@@ -1,4 +1,4 @@
-package com.example.bilabonnement;
+package com.example.bilabonnement.CustomMappers;
 
 import com.example.bilabonnement.Model.Employee;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,7 +15,6 @@ public class EmployeeMapper implements RowMapper<Employee> {
         tempEmp.setPositionID(rs.getInt("position_id"));
         tempEmp.setSalary(rs.getDouble("salary"));
         tempEmp.setFirstName(rs.getString("first_name"));
-        tempEmp.setLastName(rs.getString("last_name"));
         tempEmp.setLastName(rs.getString("last_name"));
         tempEmp.setEmail(rs.getString("email"));
         tempEmp.setPhoneNumber(rs.getString("phone_number"));

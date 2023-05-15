@@ -57,7 +57,6 @@ public class EmployeeController {
             session.setAttribute("currentUser", tempEmp);
             return "redirect:/employeedashboard";
         }
-        else
         return "redirect:/";
     }
     @GetMapping("/employeedashboard")
@@ -65,7 +64,6 @@ public class EmployeeController {
         if (session.getAttribute("currentUser") != null){
             return "/employeedashboard";
         }
-        else
         return "/index";
     }
 
