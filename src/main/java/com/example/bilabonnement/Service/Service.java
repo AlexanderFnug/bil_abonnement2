@@ -4,6 +4,7 @@ import com.example.bilabonnement.Model.*;
 import com.example.bilabonnement.Repo.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -11,6 +12,32 @@ public class Service {
 
     @Autowired
     Repository repo;
+
+    public List<Object[]> getMergedList(){
+        List<Object[]> mergedList = new ArrayList<>();
+        List<User> tempUserList = fetchAllUsers();
+        List<Car> tempCarList = fetchAllCars();
+        List<Lease> tempLeaseList = fetchAllLeases();
+        for (Car car: tempCarList) {
+            Object[] tempObjArr = new Object[3];
+            tempObjArr[0] = car;
+            for (Lease lease : tempLeaseList) {
+                if (car.getCarID() == lease.getCarID()){
+                    tempObjArr[1] = lease;
+                    for (User user : tempUserList) {
+                        if (lease.getUserID() == user.getUserID()){
+                            tempObjArr[2] = user;
+                        }
+                    }
+                } else {
+                    tempObjArr[1] = null;
+                    tempObjArr[2] = null;
+                }
+            }
+            mergedList.add(tempObjArr);
+        }
+        return mergedList;
+    }
 
     public Integer userVerification(Employee employee) {
         List<Employee> tempEmployeeList = repo.fetchAllEmployees();

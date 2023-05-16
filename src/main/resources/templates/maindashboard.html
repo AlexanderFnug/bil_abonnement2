@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INTERNAL - BilAbonnement.dk</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+</head>
+<body>
+<div class="main-container">
+    <form method="post">
+        <div class="container">
+            <input class="btn" type="submit" value="Lease" formaction="leaseDashboard">
+            <input class="btn" type="submit" value="Business analysis" formaction="carDashboard">
+            <input class="btn" type="submit" value="Damage report" formaction="damageReportDashboard">
+        </div>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Car ID</th>
+            <th>Car</th>
+            <th>Lease ID</th>
+            <th>Leased by</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${currentTab == 'all'}" th:each="obj : ${mergedList}">
+            test
+<!--            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>-->
+<!--            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>-->
+<!--            <td>-->
+<!--                <span th:if="${mergedList[1] != null}" th:with="lease=${mergedList[1]}" th:text="${lease.leaseID}"></span>-->
+<!--                <span th:if="${mergedList[1] == null}"> </span>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <span th:if="${mergedList[2] != null}" th:with="user=${mergedList[2]}" th:text="${user.firstName + ' ' + user.lastName}"></span>-->
+<!--                <span th:if="${mergedList[2] == null}"> </span>-->
+<!--            </td>-->
+        </tr>
+<!--        <tr th:if="${currentTab == 'leased' && obj[1] != null}" th:each="obj : ${mergedList}">-->
+<!--            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>-->
+<!--            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>-->
+<!--            <td th:with="lease=${mergedList[1]}" th:text="${lease.leaseID}"></td>-->
+<!--            <td th:with="user=${mergedList[2]}" th:text="${user.firstName + ' ' + user.lastName}"></td>-->
+<!--        </tr>-->
+<!--        <tr th:if="${currentTab == 'available' && obj[1] == null}" th:each="obj : ${mergedList}">-->
+<!--            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>-->
+<!--            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>-->
+<!--            <td> </td>-->
+<!--            <td> </td>-->
+<!--        </tr>-->
+        </tbody>
+    </table>
+
+</div>
+
+<div style="color: red; text-align: center" th:text="${errorMsg}"></div>
+</body>
+</html>
