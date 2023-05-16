@@ -10,6 +10,7 @@ import java.sql.SQLException;
 public class LeaseMapper implements RowMapper<Lease> {
     public Lease mapRow(ResultSet rs, int rowNum) throws SQLException {
         Lease lease = new Lease();
+        lease.setLeaseID(rs.getInt("lease_id"));
         lease.setUserID(rs.getInt("user_id"));
         lease.setEmployeeID(rs.getInt("employee_id"));
         lease.setCarID(rs.getInt("car_id"));

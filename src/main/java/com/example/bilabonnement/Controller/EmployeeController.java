@@ -27,8 +27,15 @@ public class EmployeeController {
     public String index(){
         return "index.html";
     }
-    @GetMapping("/employeeDashboard")
-    public String employeedashboard(){
+    @GetMapping("/employeedashboard")
+    public String employeedashboard(HttpSession session, Model model){
+        if (session.getAttribute("currentUser") == null){
+            return "redirect:/index";
+        }
+        model.addAttribute("mergedList", service.getMergedList());
+        model.addAttribute("totalLeaseValue", service.getLeasedTotal());
+        model.addAttribute("totalLeasedCars", service.getActiveLeases().size());
+        model.addAttribute("currentTab", "all");
         return "employeedashboard.html";
     }
 
@@ -58,20 +65,10 @@ public class EmployeeController {
         Integer tempUserID = service.userVerification(loginInfo);
         if (tempUserID != null) {
             Employee tempEmp = service.getEmployeeByID(tempUserID);
-            List<Object[]> tempMergedList = service.getMergedList();
             session.setAttribute("currentUser", tempEmp);
-            model.addAttribute("mergedList", tempMergedList);
-            model.addAttribute("currentTab", "all");
-            return "redirect:/maindashboard";
+            return "redirect:/employeedashboard";
         }
         return "redirect:/";
-    }
-    @GetMapping("/employeedashboard")
-    public String index(HttpSession session){
-        if (session.getAttribute("currentUser") != null){
-            return "/employeedashboard";
-        }
-        return "/index";
     }
 
     @PostMapping("/logout")

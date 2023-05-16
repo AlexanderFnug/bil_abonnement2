@@ -4,7 +4,12 @@ import com.example.bilabonnement.Model.*;
 import com.example.bilabonnement.Repo.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -13,6 +18,31 @@ public class Service {
     @Autowired
     Repository repo;
 
+    public List<Lease> getActiveLeases() {
+        List<Lease> activeLeaseList = fetchAllLeases();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date leaseEndDate = new Date();
+        Date currentDate = new Date();
+        for (int i = 0; i < activeLeaseList.size(); i++) {
+                try {
+                    leaseEndDate = df.parse(activeLeaseList.get(i).getDateEnd());
+                } catch(ParseException e) {
+                    e.printStackTrace();
+                }
+                if (leaseEndDate.before(currentDate)){
+                    activeLeaseList.remove(i);
+                }
+        }
+        return activeLeaseList;
+    }
+    public double getLeasedTotal(){
+        Double total = 0.0;
+        List<Lease> leaseList = fetchAllLeases();
+        for (Lease lease : leaseList) {
+            total += lease.getPrice();
+        }
+        return total;
+    }
     public List<Object[]> getMergedList(){
         List<Object[]> mergedList = new ArrayList<>();
         List<User> tempUserList = fetchAllUsers();
@@ -22,16 +52,13 @@ public class Service {
             Object[] tempObjArr = new Object[3];
             tempObjArr[0] = car;
             for (Lease lease : tempLeaseList) {
-                if (car.getCarID() == lease.getCarID()){
+                if (tempObjArr[1] == null && car.getCarID() == lease.getCarID()){
                     tempObjArr[1] = lease;
                     for (User user : tempUserList) {
                         if (lease.getUserID() == user.getUserID()){
                             tempObjArr[2] = user;
                         }
                     }
-                } else {
-                    tempObjArr[1] = null;
-                    tempObjArr[2] = null;
                 }
             }
             mergedList.add(tempObjArr);

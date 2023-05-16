@@ -15,43 +15,45 @@
         </div>
     </form>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Car ID</th>
-            <th>Car</th>
-            <th>Lease ID</th>
-            <th>Leased by</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${currentTab == 'all'}" th:each="obj : ${mergedList}">
-            test
-<!--            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>-->
-<!--            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>-->
-<!--            <td>-->
-<!--                <span th:if="${mergedList[1] != null}" th:with="lease=${mergedList[1]}" th:text="${lease.leaseID}"></span>-->
-<!--                <span th:if="${mergedList[1] == null}"> </span>-->
-<!--            </td>-->
-<!--            <td>-->
-<!--                <span th:if="${mergedList[2] != null}" th:with="user=${mergedList[2]}" th:text="${user.firstName + ' ' + user.lastName}"></span>-->
-<!--                <span th:if="${mergedList[2] == null}"> </span>-->
-<!--            </td>-->
-        </tr>
-<!--        <tr th:if="${currentTab == 'leased' && obj[1] != null}" th:each="obj : ${mergedList}">-->
-<!--            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>-->
-<!--            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>-->
-<!--            <td th:with="lease=${mergedList[1]}" th:text="${lease.leaseID}"></td>-->
-<!--            <td th:with="user=${mergedList[2]}" th:text="${user.firstName + ' ' + user.lastName}"></td>-->
+    <h1 th:text="${currentTab}">wauw</h1>
+
+<!--    <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Car ID</th>-->
+<!--            <th>Car</th>-->
+<!--            <th>Lease ID</th>-->
+<!--            <th>Leased by</th>-->
 <!--        </tr>-->
-<!--        <tr th:if="${currentTab == 'available' && obj[1] == null}" th:each="obj : ${mergedList}">-->
-<!--            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>-->
-<!--            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>-->
-<!--            <td> </td>-->
-<!--            <td> </td>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:if="${currentTab == 'all'}" th:each="obj : ${mergedList}">-->
+<!--            test-->
+<!--&lt;!&ndash;            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span th:if="${mergedList[1] != null}" th:with="lease=${mergedList[1]}" th:text="${lease.leaseID}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span th:if="${mergedList[1] == null}"> </span>&ndash;&gt;-->
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span th:if="${mergedList[2] != null}" th:with="user=${mergedList[2]}" th:text="${user.firstName + ' ' + user.lastName}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span th:if="${mergedList[2] == null}"> </span>&ndash;&gt;-->
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
 <!--        </tr>-->
-        </tbody>
-    </table>
+<!--&lt;!&ndash;        <tr th:if="${currentTab == 'leased' && obj[1] != null}" th:each="obj : ${mergedList}">&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:with="lease=${mergedList[1]}" th:text="${lease.leaseID}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:with="user=${mergedList[2]}" th:text="${user.firstName + ' ' + user.lastName}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <tr th:if="${currentTab == 'available' && obj[1] == null}" th:each="obj : ${mergedList}">&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:with="car=${mergedList[0]}" th:text="${car.carID}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:with="car=${mergedList[0]}" th:text="${car.modelName}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td> </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td> </td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--        </tbody>-->
+<!--    </table>-->
 
 </div>
 

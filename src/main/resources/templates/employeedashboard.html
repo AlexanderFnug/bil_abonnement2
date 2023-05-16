@@ -2,17 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employee Dashboard</title>
+    <title>INTERNAL - BilAbonnement.dk</title>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 <body>
-<div class="container">
-    <form method="get">
-
-        <input class="btn" type="submit" value="Lease" formaction="leaseDashboard">
-        <input class="btn" type="submit" value="Business analysis" formaction="carDashboard">
-        <input class="btn" type="submit" value="Damage report" formaction="damageReportDashboard">
+<div class="main-container">
+    <form method="post">
+        <div class="container">
+            <input class="btn" type="submit" value="Lease" formaction="leaseDashboard">
+            <input class="btn" type="submit" value="Business analysis" formaction="carDashboard">
+            <input class="btn" type="submit" value="Damage report" formaction="damageReportDashboard">
+        </div>
     </form>
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 40px;
+        }
+    </style>
+    Total cost/price of leased cars(
+    <span th:text="${totalLeasedCars}">0</span>
+    ):
+    <span th:text="${totalLeaseValue}">0,0</span>
+        <table>
+            <thead>
+            <tr>
+                <th>Car ID</th>
+                <th>Model</th>
+                <th>Lease ID</th>
+                <th>Leased by</th>
+                <th>Lease Date</th>
+                <th>Return Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${currentTab == 'all'}" th:each="list : ${mergedList}">
+                <td th:with="car=${list[0]}" th:text="${car.carID}"></td>
+                <td th:with="car=${list[0]}" th:text="${car.brand + ' ' + car.modelName}"></td>
+                <td>
+                    <span th:if="${list[1] != null}" th:with="lease=${list[1]}" th:text="${lease.leaseID}"></span>
+                    <span th:if="${list[1] == null}"> </span>
+                </td>
+                <td>
+                    <span th:if="${list[2] != null}" th:with="user=${list[2]}" th:text="${user.firstName + ' ' + user.lastName}"></span>
+                    <span th:if="${list[2] == null}"> </span>
+                </td>
+            </tr>
+            <tr th:if="${currentTab == 'leased'}" th:each="list : ${mergedList}">
+                <td th:if="${list[1] != null}" th:with="car=${list[0]}" th:text="${car.carID}"></td>
+                <td th:if="${list[1] != null}" th:with="car=${list[0]}" th:text="${car.brand + ' ' + car.modelName}"></td>
+                <td th:if="${list[1] != null}" th:with="lease=${list[1]}" th:text="${lease.leaseID}"></td>
+                <td th:if="${list[1] != null}" th:with="user=${list[2]}" th:text="${user.firstName + ' ' + user.lastName}"></td>
+            </tr>
+            <tr th:if="${currentTab == 'available'}" th:each="list : ${mergedList}">
+                <td th:if="${list[1] == null}" th:with="car=${list[0]}" th:text="${car.carID}"></td>
+                <td th:if="${list[1] == null}" th:with="car=${list[0]}" th:text="${car.brand + ' ' + car.modelName}"></td>
+            </tr>
+            </tbody>
+        </table>
+
 </div>
+
+<div style="color: red; text-align: center" th:text="${errorMsg}"></div>
 </body>
 </html>
