@@ -27,35 +27,42 @@ public class EmployeeController {
     public String index(){
         return "index.html";
     }
-    @GetMapping("/employeedashboard")
-    public String employeedashboard(HttpSession session, Model model){
+    @GetMapping("/employeeDashboard")
+    public String employeeDashboard(HttpSession session, Model model, WebRequest wr){
         if (session.getAttribute("currentUser") == null){
             return "redirect:/index";
         }
         model.addAttribute("mergedList", service.getMergedList());
         model.addAttribute("totalLeaseValue", service.getLeasedTotal());
         model.addAttribute("totalLeasedCars", service.getActiveLeases().size());
-        model.addAttribute("currentTab", "all");
+
+        if (wr.getParameter("changeTab") != null) {
+            model.addAttribute("currentTab", wr.getParameter("changeTab"));
+            return "employeedashboard.html";
+        } else {
+            model.addAttribute("currentTab", "all");
+        }
+
         return "employeedashboard.html";
     }
 
-    @GetMapping("/employeeform")
+    @GetMapping("/employeeForm")
     public String employeeForm(){
         return "employeeform.html";
     }
-    @PostMapping("/addemployee")
+    @PostMapping("/addEmployee")
     public String addEmployee(){
         return "redirect:/employeedashboard";
     }
 
-    @PostMapping("/removeemployee")
+    @PostMapping("/removeEmployee")
     public String removeEmployee(){
-        return "redirect:/employeedashboard";
+        return "redirect:/employeeDashboard";
     }
 
-    @PostMapping("/editemployee")
+    @PostMapping("/editEmployee")
     public String editEmployee(){
-        return "redirect:/employeeform";
+        return "redirect:/employeeForm";
     }
 
     @PostMapping("/login")
@@ -66,7 +73,7 @@ public class EmployeeController {
         if (tempUserID != null) {
             Employee tempEmp = service.getEmployeeByID(tempUserID);
             session.setAttribute("currentUser", tempEmp);
-            return "redirect:/employeedashboard";
+            return "redirect:/employeeDashboard";
         }
         return "redirect:/";
     }

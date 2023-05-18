@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-<div class="main-container">
+<div th:include="navbar.html"></div>
+<div>
     <form method="post">
         <div class="container">
             Car
@@ -23,10 +24,10 @@
             </select>
             Current date
             <span th:with="currentDate=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-                <input type="text" name="startDate" th:value="${currentDate}">
+                <input type="date" name="startDate" th:value="${currentDate}">
             </span>
             End date
-            <input type="text" name="endDate" th:value="${endDate}">
+            <input type="date" name="endDate" th:value="${endDate}">
             Pickup location
             <select name="locationPickup">
                 <option th:each="location : ${locationList}" th:text="${location}"></option>

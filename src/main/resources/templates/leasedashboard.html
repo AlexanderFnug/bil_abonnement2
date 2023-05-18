@@ -6,8 +6,9 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
+<div th:include="navbar.html"></div>
 <div class="main-container">
-    <form method="post">
+    <form method="get">
         <div class="container">
             <input class="btn" type="submit" value="LeaseForm" formaction="leaseForm">
         </div>

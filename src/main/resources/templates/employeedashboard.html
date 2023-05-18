@@ -6,24 +6,28 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 </head>
 <body>
-<div class="main-container">
-    <form method="post">
-        <div class="container">
-            <input class="btn" type="submit" value="Lease" formaction="leaseDashboard">
-            <input class="btn" type="submit" value="Business analysis" formaction="carDashboard">
-            <input class="btn" type="submit" value="Damage report" formaction="damageReportDashboard">
+<div th:include="navbar.html"></div>
+<div class="container">
+    <form method="get">
+        <div>
+            <input class="btn" type="submit" value="Lease Management" formaction="leaseDashboard">
+            <input class="btn" type="submit" value="Business Analysis" formaction="carDashboard">
+            <input class="btn" type="submit" value="Damage Report Management" formaction="damageReportDashboard">
         </div>
     </form>
     <style>
         table {
+            text-align: left;
             border-collapse: separate;
-            border-spacing: 40px;
+            border-spacing: 20px;
         }
     </style>
-    Total cost/price of leased cars(
-    <span th:text="${totalLeasedCars}">0</span>
-    ):
-    <span th:text="${totalLeaseValue}">0,0</span>
+    Total cost/price of leased cars(<span th:text="${totalLeasedCars}">0</span>):<span th:text="${totalLeaseValue}">0,0</span>
+    <form method="get" action="employeeDashboard">
+        <button type="submit" value="all" name="changeTab">Show All Cars</button>
+        <button type="submit" value="leased" name="changeTab">Show Leased Cars</button>
+        <button type="submit" value="available" name="changeTab">Show Available Cars</button>
+    </form>
         <table>
             <thead>
             <tr>
@@ -62,7 +66,5 @@
         </table>
 
 </div>
-
-<div style="color: red; text-align: center" th:text="${errorMsg}"></div>
 </body>
 </html>

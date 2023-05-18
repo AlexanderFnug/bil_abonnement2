@@ -1,6 +1,5 @@
 package com.example.bilabonnement.Controller;
 
-import com.example.bilabonnement.Component.BasicInfoComponent;
 import com.example.bilabonnement.Model.Car;
 import com.example.bilabonnement.Model.Employee;
 import com.example.bilabonnement.Model.Lease;
@@ -26,21 +25,18 @@ public class LeaseController {
     @Autowired
     Service service;
 
-    @Autowired
-    BasicInfoComponent basicInfo;
-
     @GetMapping("/leaseDashboard")
     public String leaseDashboard(){
         return "leasedashboard.html";
     }
 
-    @PostMapping("/leaseForm")
+    @GetMapping("/leaseForm")
     public String leaseForm(Model model, HttpSession session){
         List<Lease> leaseList = service.fetchAllLeases();
         List<Car> leaseableCarList = service.fetchAllCars();
         List<User> userList = service.fetchAllUsers();
         List<Employee> employeeList = service.fetchAllEmployees();
-        List<String> locationList = basicInfo.getLocationList();
+        List<String> locationList = service.fetchAllLocations();
         //Remove already leased cars
         for (int i = 0; i < leaseableCarList.size(); i++) {
             for (Lease l : leaseList) {

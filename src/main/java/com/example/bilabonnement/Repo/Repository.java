@@ -88,7 +88,7 @@ public class Repository {
     }
 
     public List<Car> fetchAllCars() {
-        String sql = "SELECT * FROM car";
+        String sql = "SELECT car_id, car.model_id, mileage, year, status_id, brand, name, fuel_type_id FROM car JOIN carmodel ON car.model_id = carmodel.model_id";
         RowMapper<Car> rowMapper = new CarMapper();
         return db.query(sql, rowMapper);
     }
@@ -132,23 +132,22 @@ public class Repository {
     }
 
     public DamageReport getDamageReportByID(int damageReportID) {
-        String sql = "SELECT report_id, description, lease_id, employee_id, cost, date_accident, date_report FROM DamageReport WHERE report_id = ?";
+        String sql = "SELECT * FROM DamageReport WHERE report_id = ?";
         RowMapper<DamageReport> rowMapper = new DamageReportMapper();
         DamageReport d = db.queryForObject(sql, rowMapper, damageReportID);
         return d;
     }
 
     public Lease getLeaseByID(int leaseID) {
-        String sql = "SELECT car_id, user_id, employee_id, date_start, date_end, date_return," +
-                "location_pickup, location_return, max_mileage, price FROM leases WHERE lease_id = ?";
+        String sql = "SELECT * FROM lease WHERE lease_id = ?";
         RowMapper<Lease> rowMapper = new LeaseMapper();
         Lease l = db.queryForObject(sql, rowMapper, leaseID);
         return l;
     }
 
     public User getUserByID(int userID) {
-        String sql = "SELECT * FROM accounts WHERE user_id = ?";
-        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
+        String sql = "SELECT * FROM user WHERE user_id = ?";
+        RowMapper<User> rowMapper = new UserMapper();
         User u = db.queryForObject(sql, rowMapper, userID);
         return u;
     }

@@ -6,11 +6,8 @@
     <link rel="stylesheet" type="text/css" href="style.css?v=1234">
 </head>
 <body>
+<div th:include="navbar.html"></div>
 <div class="main-container">
-    <form method="post">
-        <input style="background-color: rgba(253,51,57,0.98)" class="btn2" type="submit" value="Logout" formaction="logout">
-    </form>
-
     <div class="header">Damage Report</div>
 
     <form method="get" class="input-form">
