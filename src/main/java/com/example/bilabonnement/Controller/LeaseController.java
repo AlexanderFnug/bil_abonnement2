@@ -17,6 +17,8 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +33,7 @@ public class LeaseController {
     }
 
     @GetMapping("/leaseForm")
-    public String leaseForm(Model model, HttpSession session){
+    public String leaseForm(Model model, WebRequest wr){
         List<Lease> leaseList = service.fetchAllLeases();
         List<Car> leaseableCarList = service.fetchAllCars();
         List<User> userList = service.fetchAllUsers();
@@ -49,6 +51,21 @@ public class LeaseController {
         model.addAttribute("userList",userList);
         model.addAttribute("employeeList",employeeList);
         model.addAttribute("locationList",locationList);
+
+        //Ugly code to calculate preset end date
+        LocalDate endDate = LocalDate.now();
+        switch (wr.getParameter("leaseLength")){
+            case "lease3M":
+                endDate = endDate.plusMonths(3);
+                break;
+            case "lease6M":
+                endDate = endDate.plusMonths(6);
+                break;
+            case "leaseYear":
+                endDate = endDate.plusYears(1);
+                break;
+        }
+        model.addAttribute("leaseType",endDate);
         return "leaseform.html";
     }
 
@@ -61,19 +78,10 @@ public class LeaseController {
         lease.setCarID(Integer.parseInt(wr.getParameter("car")));
         lease.setMaxMileage(Integer.parseInt(wr.getParameter("maxMileage")));
         lease.setPrice(Double.parseDouble(wr.getParameter("price")));
-
-        //Ugly code to get location IDs
-        List<String> locationList = service.fetchAllLocations();
-        String tempPickup = wr.getParameter("locationPickup");
-        String tempReturn = wr.getParameter("locationReturn");
-        for (int i = 0; i < locationList.size(); i++) {
-            if (locationList.get(i).equals(tempPickup)){
-                lease.setLocationPickupID(i+1);
-            }
-            if (locationList.get(i).equals(tempReturn)){
-                lease.setLocationReturnID(i+1);
-            }
-        }
+        lease.setLocationPickupID(service.getMatchingID(wr.getParameter("locationPickup"),
+                                    service.fetchAllLocations()));
+        lease.setLocationReturnID(service.getMatchingID(wr.getParameter("locationReturn"),
+                                    service.fetchAllLocations()));
 
         service.addLease(lease);
         return "leasedashboard.html";

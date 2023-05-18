@@ -25,9 +25,8 @@ public class DamageReportController {
     Service service;
 
     @GetMapping("/damageReportForm")
-    public String damageReportForm(){
-
-        return "editdamagereport.html";
+    public String damageReportForm(Model model){
+        return "damagereportform.html";
     }
 
 
@@ -43,7 +42,7 @@ public class DamageReportController {
     DamageReport tempDam = service.getDamageReportByID(tempID);
     model.addAttribute("damageReport", tempDam);
 
-        return "editdamagereport.html";
+        return "damagereportform.html";
     }
     @GetMapping("/damageReportDashboard")
         public String getDamagereports(Model model, @ModelAttribute Employee employee, HttpSession session){

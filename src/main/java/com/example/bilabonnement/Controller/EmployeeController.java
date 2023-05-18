@@ -27,8 +27,8 @@ public class EmployeeController {
     public String index(){
         return "index.html";
     }
-    @GetMapping("/employeeDashboard")
-    public String employeeDashboard(HttpSession session, Model model, WebRequest wr){
+    @GetMapping("/mainDashboard")
+    public String mainDashboard(HttpSession session, Model model, WebRequest wr){
         if (session.getAttribute("currentUser") == null){
             return "redirect:/index";
         }
@@ -38,12 +38,12 @@ public class EmployeeController {
 
         if (wr.getParameter("changeTab") != null) {
             model.addAttribute("currentTab", wr.getParameter("changeTab"));
-            return "employeedashboard.html";
+            return "maindashboard.html";
         } else {
             model.addAttribute("currentTab", "all");
         }
 
-        return "employeedashboard.html";
+        return "maindashboard.html";
     }
 
     @GetMapping("/employeeForm")
@@ -52,12 +52,12 @@ public class EmployeeController {
     }
     @PostMapping("/addEmployee")
     public String addEmployee(){
-        return "redirect:/employeedashboard";
+        return "redirect:/mainDashboard";
     }
 
     @PostMapping("/removeEmployee")
     public String removeEmployee(){
-        return "redirect:/employeeDashboard";
+        return "redirect:/mainDashboard";
     }
 
     @PostMapping("/editEmployee")
@@ -73,7 +73,7 @@ public class EmployeeController {
         if (tempUserID != null) {
             Employee tempEmp = service.getEmployeeByID(tempUserID);
             session.setAttribute("currentUser", tempEmp);
-            return "redirect:/employeeDashboard";
+            return "redirect:/mainDashboard";
         }
         return "redirect:/";
     }

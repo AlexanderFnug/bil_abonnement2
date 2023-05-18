@@ -18,6 +18,15 @@ public class Service {
     @Autowired
     Repository repo;
 
+    public Integer getMatchingID(String strToMatch, List list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(strToMatch)) {
+                return i+1;
+            }
+        }
+        return null;
+    }
+
     public List<Lease> getActiveLeases() {
         List<Lease> activeLeaseList = fetchAllLeases();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");

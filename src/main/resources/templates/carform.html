@@ -6,6 +6,23 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
+<div th:include="navbar.html"></div>
+<div>
+    <form method="post">
+        <div class="main-container">
+            Car Model
+            <select name="carmodel">
+                <option th:each="carModel : ${carModelList}" th:value="${carModel.modelID}" th:text="${carModel.modelName}"></option>
+            </select>
+            Current mileage
+            <input type="number" name="mileage">
+            Price
+            <input type="number" name="year">
+            <input class="btn" type="submit" value="Submit" formaction="addCar">
+        </div>
 
+    </form>
+</div>
 </body>
+
 </html>

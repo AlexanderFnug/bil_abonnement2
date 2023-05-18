@@ -6,6 +6,14 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-<h1>car yoyoyoy</h1>
+<div th:include="navbar.html"></div>
+<div class="main-container">
+    <form method="get">
+        <div class="container">
+            <input class="btn" type="submit" value="Add Car" formaction="carForm">
+            <input class="btn" type="submit" value="Add Car Model" formaction="carModelForm">
+        </div>
+    </form>
+</div>
 </body>
 </html>

@@ -8,13 +8,6 @@
 <body>
 <div th:include="navbar.html"></div>
 <div class="container">
-<!--    <form method="get">-->
-<!--        <div>-->
-<!--            <input class="btn" type="submit" value="Lease Management" formaction="leaseDashboard">-->
-<!--            <input class="btn" type="submit" value="Business Analysis" formaction="carDashboard">-->
-<!--            <input class="btn" type="submit" value="Damage Report Management" formaction="damageReportDashboard">-->
-<!--        </div>-->
-<!--    </form>-->
     <style>
         table {
             text-align: left;
@@ -23,7 +16,7 @@
         }
     </style>
     Total cost/price of leased cars(<span th:text="${totalLeasedCars}">0</span>):<span th:text="${totalLeaseValue}">0,0</span>
-    <form method="get" action="employeeDashboard">
+    <form method="get" action="mainDashboard">
         <button type="submit" value="all" name="changeTab">Show All Cars</button>
         <button type="submit" value="leased" name="changeTab">Show Leased Cars</button>
         <button type="submit" value="available" name="changeTab">Show Available Cars</button>
