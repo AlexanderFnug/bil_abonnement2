@@ -8,13 +8,13 @@
 <body>
 <div th:include="navbar.html"></div>
 <div class="container">
-    <form method="get">
-        <div>
-            <input class="btn" type="submit" value="Lease Management" formaction="leaseDashboard">
-            <input class="btn" type="submit" value="Business Analysis" formaction="carDashboard">
-            <input class="btn" type="submit" value="Damage Report Management" formaction="damageReportDashboard">
-        </div>
-    </form>
+<!--    <form method="get">-->
+<!--        <div>-->
+<!--            <input class="btn" type="submit" value="Lease Management" formaction="leaseDashboard">-->
+<!--            <input class="btn" type="submit" value="Business Analysis" formaction="carDashboard">-->
+<!--            <input class="btn" type="submit" value="Damage Report Management" formaction="damageReportDashboard">-->
+<!--        </div>-->
+<!--    </form>-->
     <style>
         table {
             text-align: left;
@@ -52,15 +52,15 @@
                     <span th:if="${list[2] == null}"> </span>
                 </td>
             </tr>
-            <tr th:if="${currentTab == 'leased'}" th:each="list : ${mergedList}">
-                <td th:if="${list[1] != null}" th:with="car=${list[0]}" th:text="${car.carID}"></td>
-                <td th:if="${list[1] != null}" th:with="car=${list[0]}" th:text="${car.brand + ' ' + car.modelName}"></td>
-                <td th:if="${list[1] != null}" th:with="lease=${list[1]}" th:text="${lease.leaseID}"></td>
-                <td th:if="${list[1] != null}" th:with="user=${list[2]}" th:text="${user.firstName + ' ' + user.lastName}"></td>
+            <tr th:if="${currentTab == 'leased' && list[1] != null}" th:each="list : ${mergedList}">
+                <td th:with="car=${list[0]}" th:text="${car.carID}"></td>
+                <td th:with="car=${list[0]}" th:text="${car.brand + ' ' + car.modelName}"></td>
+                <td th:with="lease=${list[1]}" th:text="${lease.leaseID}"></td>
+                <td th:with="user=${list[2]}" th:text="${user.firstName + ' ' + user.lastName}"></td>
             </tr>
-            <tr th:if="${currentTab == 'available'}" th:each="list : ${mergedList}">
-                <td th:if="${list[1] == null}" th:with="car=${list[0]}" th:text="${car.carID}"></td>
-                <td th:if="${list[1] == null}" th:with="car=${list[0]}" th:text="${car.brand + ' ' + car.modelName}"></td>
+            <tr th:if="${currentTab == 'available' && list[1] == null}" th:each="list : ${mergedList}">
+                <td th:with="car=${list[0]}" th:text="${car.carID}"></td>
+                <td th:with="car=${list[0]}" th:text="${car.brand + ' ' + car.modelName}"></td>
             </tr>
             </tbody>
         </table>
