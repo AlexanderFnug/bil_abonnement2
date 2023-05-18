@@ -43,17 +43,17 @@ public class EmployeeController {
     public String employeeForm(){
         return "employeeform.html";
     }
-    @PostMapping("/addEmployee")
+    @PostMapping("/addemployee")
     public String addEmployee(){
         return "redirect:/employeedashboard";
     }
 
-    @PostMapping("/removeEmployee")
+    @PostMapping("/removeemployee")
     public String removeEmployee(){
         return "redirect:/employeedashboard";
     }
 
-    @PostMapping("/editEmployee")
+    @PostMapping("/editemployee")
     public String editEmployee(){
         return "redirect:/employeeform";
     }
