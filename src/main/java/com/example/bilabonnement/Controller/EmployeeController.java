@@ -61,6 +61,7 @@ public class EmployeeController {
     }
     @GetMapping("/employeedashboard")
     public String index(HttpSession session){
+
         if (session.getAttribute("currentUser") != null){
             return "/employeedashboard";
         }

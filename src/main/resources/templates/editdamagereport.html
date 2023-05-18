@@ -11,7 +11,7 @@
 
     <div class="input-container">
       <label for="description">Description:</label>
-      <textarea id="description" name="description" th:value="${damageReport.getDescription()}" rows="5" required>
+      <textarea id="description" name="description" th:text="${damageReport.getDescription()}" rows="5" required>
 
       </textarea>
     </div>

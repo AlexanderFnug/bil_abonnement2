@@ -29,12 +29,12 @@ public class Repository {
     }
 
     public void addCar(Car car) {
-        String sql = "INSERT INTO Car (model_id, mileage, year, status_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Car (model_id, year, mileage, status_id) VALUES (?, ?, ?, ?)";
         db.update(sql, car.getModelID(), car.getMileage(), car.getYear(), car.getStatusID());
     }
 
     public void addCarModel(CarModel carModel) {
-        String sql = "INSERT INTO CarModel (brand, name, fuel_type_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO CarModel (brand, fuel_type_id, name) VALUES (?, ?, ?)";
         db.update(sql, carModel.getBrand(), carModel.getName(), carModel.getFuelType());
     }
 
@@ -54,8 +54,11 @@ public class Repository {
     }
 
     public void addLease(Lease lease) {
-        String sql = "INSERT INTO lease (car_id, user_id, employee_id, date_start, date_end, date_return, location_pickup, location_return, max_mileage, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        db.update(sql, lease.getCarID(), lease.getUserID(), lease.getEmployeeID(), lease.getDateStart(), lease.getDateEnd(), lease.getDateReturn(), lease.getLocationPickupID(), lease.getLocationReturnID(), lease.getMaxMileage(), lease.getPrice());
+        String sql = "INSERT INTO lease (car_id, user_id, employee_id, date_start, date_end, date_return, " +
+                "location_pickup, location_return, max_mileage, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        db.update(sql, lease.getCarID(), lease.getUserID(), lease.getEmployeeID(), lease.getDateStart(),
+                lease.getDateEnd(), lease.getDateReturn(), lease.getLocationPickupID(), lease.getLocationReturnID(),
+                lease.getMaxMileage(), lease.getPrice());
     }
 
     public void addDamageReport(DamageReport report) {
@@ -79,13 +82,14 @@ public class Repository {
     }
 
     public List<Lease> fetchAllLeases() {
-        String sql = "SELECT * FROM Lease";
+        String sql = "SELECT car_id, user_id, employee_id, date_start, date_end, date_return, " +
+                "location_pickup, location_return, max_mileage, price FROM Lease";
         RowMapper<Lease> rowMapper = new LeaseMapper();
         return db.query(sql, rowMapper);
     }
 
     public List<DamageReport> fetchAllDamageReports() {
-        String sql = "SELECT * FROM CarDamageReport";
+        String sql = "SELECT * FROM DamageReport";
         RowMapper<DamageReport> rowMapper = new DamageReportMapper();
         return db.query(sql, rowMapper);
     }
@@ -120,29 +124,32 @@ public class Repository {
     //Getters by ID
 
     public Employee getEmployeeByID(int employeeID) {
-        String sql = "SELECT * FROM employee WHERE employee_id = ?";
-        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
+        String sql = "SELECT employee_id, employee.user_id, password, position_id, salary, first_name, last_name, " +
+                "email, phone_number, address FROM Employee JOIN User ON Employee.user_id = User.user_id AND Employee.employee_id = ?";
+        RowMapper<Employee> rowMapper = new EmployeeMapper();
         Employee emp = db.queryForObject(sql, rowMapper, employeeID);
         return emp;
     }
 
+
     public Car getCarByID(int carID) {
-        String sql = "SELECT * FROM cars WHERE car_id = ?";
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        String sql = "SELECT model_id, year, mileage, status_id FROM cars WHERE car_id = ?";
+        RowMapper<Car> rowMapper = new CarMapper();
         Car c = db.queryForObject(sql, rowMapper, carID);
         return c;
     }
 
     public DamageReport getDamageReportByID(int damageReportID) {
-        String sql = "SELECT * FROM DamageReport WHERE report_id = ?";
-        RowMapper<DamageReport> rowMapper = new BeanPropertyRowMapper<>(DamageReport.class);
+        String sql = "SELECT report_id, description, lease_id, employee_id, cost, date_accident, date_report FROM DamageReport WHERE report_id = ?";
+        RowMapper<DamageReport> rowMapper = new DamageReportMapper();
         DamageReport d = db.queryForObject(sql, rowMapper, damageReportID);
         return d;
     }
 
     public Lease getLeaseByID(int leaseID) {
-        String sql = "SELECT * FROM leases WHERE lease_id = ?";
-        RowMapper<Lease> rowMapper = new BeanPropertyRowMapper<>(Lease.class);
+        String sql = "SELECT car_id, user_id, employee_id, date_start, date_end, date_return," +
+                "location_pickup, location_return, max_mileage, price FROM leases WHERE lease_id = ?";
+        RowMapper<Lease> rowMapper = new LeaseMapper();
         Lease l = db.queryForObject(sql, rowMapper, leaseID);
         return l;
     }

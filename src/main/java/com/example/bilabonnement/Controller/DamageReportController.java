@@ -33,7 +33,6 @@ public class DamageReportController {
 
     @PostMapping("/deleteDamageReport")
     public String deleteDamageReport(WebRequest wr){
-        System.out.println("reportID: "+wr.getParameter("reportID"));
     service.deleteDamageReportByID(Integer.parseInt(wr.getParameter("reportID")));
         return "redirect:/damageReportDashboard";
     }
@@ -42,8 +41,6 @@ public class DamageReportController {
     public String editDamageReport(WebRequest wr, Model model){
     int tempID = Integer.parseInt(wr.getParameter("reportID"));
     DamageReport tempDam = service.getDamageReportByID(tempID);
-        System.out.println(tempDam.getDescription()+" Get description");
-        System.out.println(tempDam.getEmployeeID()+"emp ID");
     model.addAttribute("damageReport", tempDam);
 
         return "editdamagereport";
@@ -58,8 +55,10 @@ public class DamageReportController {
     }
 
     @PostMapping("/addDamageReport")
-    public String addDamageReport(@ModelAttribute DamageReport damageReport, WebRequest wr, HttpSession session) {
+    public String addDamageReport(Model model, @ModelAttribute DamageReport damageReport, WebRequest wr,
+                                  HttpSession session) {
         Employee tempEmp = (Employee) session.getAttribute("currentUser");
+        model.addAttribute(tempEmp);
         damageReport.setDescription(wr.getParameter("description"));
         damageReport.setLeaseID(Integer.parseInt(wr.getParameter("lease_id")));
         damageReport.setEmployeeID(tempEmp.getEmployeeID());
