@@ -56,8 +56,9 @@ public class Repository {
     }
 
     public void addDamageReport(DamageReport report) {
-        String sql = "INSERT INTO CarDamageReport (description, date_accident, date_report, lease_id, employee_id, cost) VALUES (?, ?, ?, ? ,? ,?)";
-        db.update(sql, report.getDescription(), report.getDateAccident(), report.getDateReport(), report.getLeaseID(), report.getEmployeeID(), report.getCost());
+        String sql = "INSERT INTO DamageReport (description, lease_id, employee_id,  cost, date_accident, date_report) VALUES (?, ?, ?, ? ,? ,?)";
+        db.update(sql, report.getDescription(), report.getLeaseID(), report.getEmployeeID(), report.getCost(),
+                report.getDateAccident(), report.getDateReport());
     }
     //Fetch all
 
@@ -81,13 +82,13 @@ public class Repository {
     }
 
     public List<DamageReport> fetchAllDamageReports() {
-        String sql = "SELECT * FROM CarDamageReport";
+        String sql = "SELECT * FROM DamageReport";
         RowMapper<DamageReport> rowMapper = new DamageReportMapper();
         return db.query(sql, rowMapper);
     }
 
     public List<Car> fetchAllCars() {
-        String sql = "SELECT car_id, car.model_id, mileage, year, status_id, carmodel.brand, carmodel.name, carmodel.fuel_type_id FROM car JOIN carmodel ON car.model_id = carmodel.model_id;";
+        String sql = "SELECT * FROM car";
         RowMapper<Car> rowMapper = new CarMapper();
         return db.query(sql, rowMapper);
     }
@@ -124,22 +125,23 @@ public class Repository {
     }
 
     public Car getCarByID(int carID) {
-        String sql = "SELECT * FROM cars WHERE car_id = ?";
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        String sql = "SELECT model_id, year, mileage, status_id FROM cars WHERE car_id = ?";
+        RowMapper<Car> rowMapper = new CarMapper();
         Car c = db.queryForObject(sql, rowMapper, carID);
         return c;
     }
 
     public DamageReport getDamageReportByID(int damageReportID) {
-        String sql = "SELECT * FROM CarDamageReport WHERE report_id = ?";
-        RowMapper<DamageReport> rowMapper = new BeanPropertyRowMapper<>(DamageReport.class);
+        String sql = "SELECT report_id, description, lease_id, employee_id, cost, date_accident, date_report FROM DamageReport WHERE report_id = ?";
+        RowMapper<DamageReport> rowMapper = new DamageReportMapper();
         DamageReport d = db.queryForObject(sql, rowMapper, damageReportID);
         return d;
     }
 
     public Lease getLeaseByID(int leaseID) {
-        String sql = "SELECT * FROM leases WHERE lease_id = ?";
-        RowMapper<Lease> rowMapper = new BeanPropertyRowMapper<>(Lease.class);
+        String sql = "SELECT car_id, user_id, employee_id, date_start, date_end, date_return," +
+                "location_pickup, location_return, max_mileage, price FROM leases WHERE lease_id = ?";
+        RowMapper<Lease> rowMapper = new LeaseMapper();
         Lease l = db.queryForObject(sql, rowMapper, leaseID);
         return l;
     }
@@ -155,7 +157,7 @@ public class Repository {
     //TODO: Needs to be updated. Will cause SQL exceptions !!
 
     public void deleteDamageReportByID(int damageReportID) { //removes one row from item database
-        String sql = "DELETE FROM damagereport WHERE damageReportID = ?";
+        String sql = "DELETE FROM DamageReport WHERE report_id = ?";
         db.update(sql, damageReportID);
     }
 
@@ -204,8 +206,8 @@ public class Repository {
     }
 
     public void updateDamageReport(DamageReport report) {
-        String sql = "UPDATE CarDamageReport SET description = ?, date_accident = ?, date_report = ?, lease_id = ?, employee_id = ?, cost = ? WHERE reportID = ?";
-        db.update(sql, report.getDescription(), report.getDateAccident(), report.getDateReport(), report.getLeaseID(), report.getEmployeeID(), report.getCost(), report.getReportID());
+        String sql = "UPDATE DamageReport SET description = ?, lease_id = ?, employee_id = ?, cost = ?, date_accident = ?, date_report = ? WHERE reportID = ?";
+        db.update(sql, report.getReportID(), report.getDescription(), report.getLeaseID(), report.getEmployeeID(), report.getCost(), report.getDateAccident(), report.getDateReport());
     }
 
     public void updateCar(Car car) {

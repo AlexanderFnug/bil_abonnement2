@@ -5,6 +5,31 @@
     <title>Damage Report</title>
 </head>
 <body>
+<div class="maincontainer">
+    <form method="post">
+        <div class="header">Add Damage Report</div>
+
+        <div class="input-container">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+        <div class="input-container">
+            <label for="lease_id">Lease id:</label>
+            <input type="text" id="lease_id" name="lease_id" required>
+        </div>
+        <div class="input-container">
+            <label for="cost">Cost:</label>
+            <input type="number" id="cost" name="cost" required>
+        </div>
+        <div class="input-container">
+            <label for="date_accident">Date of accident:</label>
+            <input type="date" id="date_accident" name="date_accident" required >
+        </div>
+
+
+        <input class="btn" type="submit" value="Submit" formaction="addDamageReport">
+    </form>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit damage report</title>
+</head>
+<body>
+<div class="maincontainer">
+  <form method="post">
+    <div class="header">Add Damage Report</div>
+
+    <div class="input-container">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" th:text="${damageReport.getDescription()}" rows="5" required>
+
+      </textarea>
+    </div>
+    <div class="input-container">
+      <label for="lease_id">Lease id:</label>
+      <input type="text" id="lease_id" name="lease_id" th:value="${damageReport.getLeaseID()}" required>
+    </div>
+    <div class="input-container">
+      <label for="employee_id">employee id:</label>
+      <input type="text" id="employee_id" name="employee_id" th:value="${damageReport.getEmployeeID()}" required>
+    </div>
+    <div class="input-container">
+      <label for="cost">Cost:</label>
+      <input type="number" id="cost" name="cost" th:value="${damageReport.getCost()}" required>
+    </div>
+    <div class="input-container">
+      <label for="date_accident">Date of accident:</label>
+      <input type="date" id="date_accident" name="date_accident" th:value="${damageReport.getDateAccident()}" required >
+    </div>
+
+
+    <input class="btn" type="submit" value="Submit" formaction="addDamageReport">
+  </form>
+</div>
+</body>
+</html>
