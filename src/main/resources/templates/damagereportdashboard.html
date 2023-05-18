@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css?v=1234">
 </head>
 <body>
-<div class="maincontainer">
+<div class="main-container">
     <form method="post">
         <input style="background-color: rgba(253,51,57,0.98)" class="btn2" type="submit" value="Logout" formaction="logout">
     </form>
+
     <div class="header">Damage Report</div>
+
     <form method="get" class="input-form">
         <input class="btn2" type="submit" value=" + Add damage report" formaction="damageReportForm">
     </form>
+
+<div class="reports-container">
+    <div class="row" th:each="damageReport, iteration :  ${damageReports}">
+        DamageReport <span class="rowItem" th:text="${iteration.count}"/>. description
+        <span class="rowItem" th:text="${damageReport.description}"/>
+        <form method="post" class="btns">
+            <input class="edit" type="submit" value="Edit" formaction="editDamageReport">
+            <input class="delete" type="submit" value="Delete" formaction="deleteDamageReport">
+            <input type="hidden" th:value="${damageReport.reportID}" name="reportID">
+        </form>
+    </div>
 </div>
-<div class="row" th:each="damageReport, iteration :  ${damageReports}">
-    DamageReport <span class="rowItem" th:text="${iteration.count}"/>. description
-    <span class="rowItem" th:text="${damageReport.description}"/>
-    <form method="post">
-        <input class="btn" type="submit" value="Edit" formaction="editDamageReport">
-        <input class="btn" type="submit" value="Delete" formaction="deleteDamageReport">
-        <input type="hidden" th:value="${damageReport.reportID}" name="reportID">
-    </form>
 </div>
 
 
