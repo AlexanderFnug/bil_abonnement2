@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>INTERNAL - BilAbonnement.dk</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <link rel="stylesheet" type="text/css" href="style.css?v=1234">
 </head>
 <body>
 <div th:include="navbar.html"></div>
@@ -17,9 +17,9 @@
     </style>
     Total cost/price of leased cars(<span th:text="${totalLeasedCars}">0</span>):<span th:text="${totalLeaseValue}">0,0</span> DKK
     <form method="get" action="mainDashboard">
-        <button type="submit" value="all" name="changeTab">Show All Cars</button>
-        <button type="submit" value="leased" name="changeTab">Show Leased Cars</button>
-        <button type="submit" value="available" name="changeTab">Show Available Cars</button>
+        <button class="btn" type="submit" value="all" name="changeTab">Show All Cars</button>
+        <button class="btn" type="submit" value="leased" name="changeTab">Show Leased Cars</button>
+        <button class="btn" type="submit" value="available" name="changeTab">Show Available Cars</button>
     </form>
         <table>
             <thead>
