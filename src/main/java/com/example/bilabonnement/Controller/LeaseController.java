@@ -5,22 +5,16 @@ import com.example.bilabonnement.Model.Employee;
 import com.example.bilabonnement.Model.Lease;
 import com.example.bilabonnement.Model.User;
 import com.example.bilabonnement.Service.Service;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class LeaseController {
@@ -28,7 +22,9 @@ public class LeaseController {
     Service service;
 
     @GetMapping("/leaseDashboard")
-    public String leaseDashboard(){
+    public String leaseDashboard(Model model){
+        List<Object[]> mergedList = service.getMergedLeaseList();
+        model.addAttribute("mergedList", mergedList);
         return "leasedashboard.html";
     }
 
@@ -39,7 +35,7 @@ public class LeaseController {
         List<User> userList = service.fetchAllUsers();
         List<Employee> employeeList = service.fetchAllEmployees();
         List<String> locationList = service.fetchAllLocations();
-        //Remove already leased cars
+        //Remove already leased cars TODO: Move to service layer
         for (int i = 0; i < leaseableCarList.size(); i++) {
             for (Lease l : leaseList) {
                 if (leaseableCarList.get(i).getCarID() == l.getCarID()){

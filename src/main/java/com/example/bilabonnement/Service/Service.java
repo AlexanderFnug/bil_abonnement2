@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,20 +51,55 @@ public class Service {
         }
         return total;
     }
-    public List<Object[]> getMergedList(){
+
+    public List<Object[]> getMergedLeaseList(){ //TODO: Use sql query instead??????
         List<Object[]> mergedList = new ArrayList<>();
         List<User> tempUserList = fetchAllUsers();
         List<Car> tempCarList = fetchAllCars();
         List<Lease> tempLeaseList = fetchAllLeases();
+        List<Lease> tempActiveLeaseList = getActiveLeases();
+        for (Lease lease : tempLeaseList) {
+            Object[] tempObjArr = new Object[4]; //0 = lease, 1 = boolean(status), 2 = user, 3 = car
+            tempObjArr[0] = lease;
+            for (Lease activeLease : tempActiveLeaseList) {
+                if (lease.getLeaseID() == activeLease.getLeaseID()){
+                    tempObjArr[1] = true;
+                }
+            }
+            for (User user : tempUserList) {
+                if (lease.getUserID() == user.getUserID()){
+                    tempObjArr[2] = user;
+                }
+            }
+            for (Car car : tempCarList) {
+                if (lease.getCarID() == car.getCarID()){
+                    tempObjArr[3] = car;
+                }
+            }
+            mergedList.add(tempObjArr);
+        }
+        return mergedList;
+    }
+    public List<Object[]> getMergedCarList(){ //TODO: Use sql query instead??????
+        List<Object[]> mergedList = new ArrayList<>();
+        List<User> tempUserList = fetchAllUsers();
+        List<Car> tempCarList = fetchAllCars();
+        List<Lease> tempLeaseList = fetchAllLeases();
+        List<Lease> tempActiveLeaseList = getActiveLeases();
         for (Car car: tempCarList) {
             Object[] tempObjArr = new Object[3];
             tempObjArr[0] = car;
             for (Lease lease : tempLeaseList) {
-                if (tempObjArr[1] == null && car.getCarID() == lease.getCarID()){
-                    tempObjArr[1] = lease;
-                    for (User user : tempUserList) {
-                        if (lease.getUserID() == user.getUserID()){
-                            tempObjArr[2] = user;
+                for (Lease activeLease : tempActiveLeaseList) {
+                    if (tempObjArr[1] == null &&
+                                car.getCarID() == lease.getCarID() &&
+                                lease.getLeaseID() == activeLease.getLeaseID()){
+
+                        tempObjArr[1] = lease;
+                        for (User user : tempUserList) {
+                            if (lease.getUserID() == user.getUserID()){
+                                tempObjArr[2] = user;
+                            }
                         }
                     }
                 }

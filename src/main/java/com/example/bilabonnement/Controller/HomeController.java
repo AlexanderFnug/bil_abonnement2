@@ -25,8 +25,9 @@ public class HomeController {
         if (session.getAttribute("currentUser") == null){
             return "redirect:/index";
         }
-        model.addAttribute("mergedList", service.getMergedList());
+        model.addAttribute("mergedList", service.getMergedCarList()); //Matches user/lease/car objects in one single array and adds the array to a list, filters inactive leases
         model.addAttribute("totalLeaseValue", service.getLeasedTotal());
+        model.addAttribute("activeLeases", service.getActiveLeases());
         model.addAttribute("totalLeasedCars", service.getActiveLeases().size());
 
         if (wr.getParameter("changeTab") != null) {
