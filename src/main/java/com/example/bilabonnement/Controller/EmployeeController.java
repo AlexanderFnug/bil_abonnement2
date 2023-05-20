@@ -23,36 +23,32 @@ public class EmployeeController {
     @Autowired
     Service service;
 
-    @GetMapping("/")                //Login page
-    public String index(){
-        return "index.html";
-    }
-    @GetMapping("/mainDashboard")
-    public String mainDashboard(HttpSession session, Model model, WebRequest wr){
-        if (session.getAttribute("currentUser") == null){
-            return "redirect:/index";
-        }
-        model.addAttribute("mergedList", service.getMergedList());
-        model.addAttribute("totalLeaseValue", service.getLeasedTotal());
-        model.addAttribute("totalLeasedCars", service.getActiveLeases().size());
-
-        if (wr.getParameter("changeTab") != null) {
-            model.addAttribute("currentTab", wr.getParameter("changeTab"));
-            return "maindashboard.html";
-        } else {
-            model.addAttribute("currentTab", "all");
-        }
-
-        return "maindashboard.html";
+    @GetMapping("/employeeDashboard")
+    public String employeeDashboard(Model model){
+        List<String> positionList = service.fetchEmployeePositions();
+        List<Employee> employeeList = service.fetchAllEmployees();
+        model.addAttribute("positionList", positionList);
+        model.addAttribute("employeeList", employeeList);
+        return "employeedashboard.html";
     }
 
     @GetMapping("/employeeForm")
-    public String employeeForm(){
+    public String employeeForm(Model model){
+        List<String> positionList = service.fetchEmployeePositions();
+        List<Employee> userList = service.fetchAllEmployees();
+        model.addAttribute("positionList", positionList);
+        model.addAttribute("userList", userList);
         return "employeeform.html";
     }
     @PostMapping("/addEmployee")
-    public String addEmployee(){
-        return "redirect:/mainDashboard";
+    public String addEmployee(@ModelAttribute Employee employee, WebRequest wr){
+        employee.setUserID(Integer.parseInt(wr.getParameter("user")));
+        employee.setSalary(Integer.parseInt(wr.getParameter("salary")));
+        employee.setPassword(wr.getParameter("password"));
+        employee.setPositionID(service.getMatchingID(wr.getParameter("position"),
+                service.fetchEmployeePositions()));
+        service.addEmployee(employee);
+        return "redirect:/employeeDashboard";
     }
 
     @PostMapping("/removeEmployee")
@@ -65,22 +61,4 @@ public class EmployeeController {
         return "redirect:/employeeForm";
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute Employee loginInfo, WebRequest wr, HttpSession session, Model model){
-        loginInfo.setEmail(wr.getParameter("email"));
-        loginInfo.setPassword(wr.getParameter("password"));
-        Integer tempUserID = service.userVerification(loginInfo);
-        if (tempUserID != null) {
-            Employee tempEmp = service.getEmployeeByID(tempUserID);
-            session.setAttribute("currentUser", tempEmp);
-            return "redirect:/mainDashboard";
-        }
-        return "redirect:/";
-    }
-
-    @PostMapping("/logout")
-    public String logout(HttpSession session){
-        session.invalidate();
-        return "redirect:/";
-    }
 }

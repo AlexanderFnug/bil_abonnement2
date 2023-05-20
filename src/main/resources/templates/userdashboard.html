@@ -6,5 +6,34 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
+<div th:include="navbar.html"></div>
+<div class="main-container">
+    <form method="get">
+        <div class="container">
+            <input class="btn" type="submit" value="Register Customer" formaction="userForm">
+        </div>
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Actively leased cars</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${filteredUserList}">
+            <td th:text="${user.userID}"></td>
+            <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phoneNumber}"></td>
+            <td th:text="${user.address}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

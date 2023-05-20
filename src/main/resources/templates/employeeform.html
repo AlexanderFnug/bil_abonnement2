@@ -6,6 +6,23 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-
+<div th:include="navbar.html"></div>
+<div class="main-container">
+    <form method="post">
+        Add registered user as employee
+        <select name="user">
+            <option th:each="user : ${userList}" th:value="${user.userID}" th:text="${user.firstName + ' ' + user.lastName + ' (' + user.email + ')'}"></option>
+        </select>
+        Employee Position
+        <select name="employeePosition">
+            <option th:each="position : ${positionList}" th:text="${position}"></option>
+        </select>
+        Password
+        <input type="password" name="password">
+        Salary
+        <input type="number" name="salary">
+        <input class="btn" type="submit" value="Submit" formaction="addEmployee">
+    </form>
+</div>
 </body>
 </html>

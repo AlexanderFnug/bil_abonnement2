@@ -19,7 +19,11 @@ public class CarController {
     Service service;
 
     @GetMapping("/carDashboard")
-    public String carDashboard(){
+    public String carDashboard(Model model){
+        List<Car> carList = service.fetchAllCars();
+        List<CarModel> carModelList = service.fetchAllCarModels();
+        model.addAttribute("carList", carList);
+        model.addAttribute("carModelList", carModelList);
         return "cardashboard.html";
     }
 
@@ -39,11 +43,12 @@ public class CarController {
 
     @PostMapping("/addCar")
     public String addCar(@ModelAttribute Car car, WebRequest wr){
-        car.setModelID(Integer.parseInt(wr.getParameter("modelID")));
+        car.setModelID(Integer.parseInt(wr.getParameter("carmodel")));
         car.setYear(Integer.parseInt(wr.getParameter("year")));
         car.setMileage(Integer.parseInt(wr.getParameter("mileage")));
+        car.setStatusID(1);
         service.addCar(car);
-        return "redirect:/cardashboard";
+        return "redirect:/carDashboard";
     }
 
     @PostMapping("/addCarModel")
@@ -53,27 +58,27 @@ public class CarController {
         carModel.setFuelTypeID(service.getMatchingID(wr.getParameter("fuelType"),
                                                         service.fetchAllFuelTypes()));
         service.addCarModel(carModel);
-        return "redirect:/cardashboard";
+        return "redirect:/carDashboard";
     }
 
     @PostMapping("/removeCar")
     public String removeCar(){
-        return "redirect:/cardashboard";
+        return "redirect:/carDashboard";
     }
 
     @PostMapping("/removeCarModel")
     public String removeCarModel(){
-        return "redirect:/cardashboard";
+        return "redirect:/carDashboard";
     }
 
     @PostMapping("/editCar")
     public String editCar(){
-        return "redirect:/carform";
+        return "redirect:/carForm";
     }
 
     @PostMapping("/editCarModel")
     public String editCarModel(){
-        return "redirect:/carmodelform";
+        return "redirect:/carmodelForm";
     }
 
 }

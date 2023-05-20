@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div th:include="navbar.html"></div>
+<div class="main-container">
+    <form method="get">
+        <div class="container">
+            <input class="btn" type="submit" value="Register employee" formaction="employeeForm">
+        </div>
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Full Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employeeList}">
+            <td th:text="${employee.employeeID}"></td>
+            <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
+            <td th:with="pos=${employee.positionID - 1}" th:text="${positionList[__${pos}__]}"></td>
+            <td th:text="${employee.salary}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.phoneNumber}"></td>
+            <td th:text="${employee.address}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
