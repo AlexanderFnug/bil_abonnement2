@@ -5,6 +5,7 @@ body {
     padding: 0;
 }
 
+/* Container styles */
 .container{
     border: none;
     border-radius: 10px;
@@ -12,8 +13,20 @@ body {
     padding: 1.5rem 2rem;
     margin: 20px;
 }
+/* Additional styles */
+.container span {
+    white-space: nowrap;
+}
 
-/* Container styles */
+.container form {
+    margin-bottom: 20px;
+}
+
+.container .total-cost {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 .main-container {
     margin: 20px;
     display: flex;
@@ -80,7 +93,6 @@ body {
     gap: 8px;
 }
 
-/* Row styles */
 .row {
     border: none;
     border-radius: 8px;
@@ -95,13 +107,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* Button container styles */
-.btns {
-    display: flex;
-    justify-content: space-around;
-    padding: 5px;
-}
-
 /* Edit button styles */
 .edit {
     all: unset;
@@ -109,14 +114,14 @@ body {
     border-radius: 8px;
     box-shadow: 0px 0px 3px lightgray;
     padding: 5px;
-    background-color: #ffffff;
+    background-color: #daefcf;
     color: #000000;
     cursor: pointer;
     transition: background-color 0.2s ease-in, color 0.2s ease-in, box-shadow 0.2s ease-in;
 }
 
 .edit:hover {
-    background-color: #bbffbb;
+    background-color: #9fea9f;
     color: #003400;
     padding: 7px;
     box-shadow: -2px 2px 5px gray;
@@ -125,20 +130,26 @@ body {
     all: unset;
     border: none;
     border-radius: 8px;
-    box-shadow: 0px 0px 3px lightgray;
+    box-shadow: 0px 0px 3px gray;
     padding: 2px;
-    background: white;
+    background: #ece2e2;
     color: black;
 }
 .delete:hover{
-    background: #bbffbb;
+    background: #eaadaf;
     color: #003400;
     padding: 5px;
     box-shadow: -2px 2px 5px gray;
 
 }
 
-/* Button styles */
+/* Button container styles */
+.btns {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+}
+
 .btn {
     display: inline-block;
     background: none;
@@ -186,16 +197,48 @@ table tr:hover {
     background-color: #eaeaea;
 }
 
-/* Additional styles */
-.container span {
-    white-space: nowrap;
+.form-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px lightgrey;
+}
+.form-input{
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid lightgray;
 }
 
-.container form {
+.header {
+    font-size: 24px;
+    font-weight: bold;
     margin-bottom: 20px;
 }
 
-.container .total-cost {
-    font-weight: bold;
-    margin-bottom: 10px;
+.input-container {
+    margin-bottom: 20px;
 }
+.input-container-date{
+    isplay: flex;
+    flex-direction: column;
+}
+.dropdown{
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.input-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-container input,
+.input-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+}
+
