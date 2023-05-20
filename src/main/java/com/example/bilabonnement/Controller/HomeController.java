@@ -31,7 +31,6 @@ public class HomeController {
 
         if (wr.getParameter("changeTab") != null) {
             model.addAttribute("currentTab", wr.getParameter("changeTab"));
-            return "maindashboard.html";
         } else {
             model.addAttribute("currentTab", "all");
         }
