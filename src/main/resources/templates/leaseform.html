@@ -3,47 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Lease Form</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" href="style.css?v=1234">
 </head>
 <body>
 <div th:include="navbar.html"></div>
-<div>
-    <form method="post">
-        <div class="main-container">
-            Car
-            <select name="car">
+<div class="main-container">
+    <form method="post" class="form-container">
+        <div class="header">Lease Form</div>
+
+        <div class="form-row">
+            <label for="car">Car:</label>
+            <select id="car" name="car" class="form-input">
                 <option th:each="car : ${carList}" th:value="${car.carID}" th:text="${car.modelName}"></option>
             </select>
-            Customer
-            <select name="user">
-                <option th:each="user : ${userList}" th:value="${user.userID}" th:text="${user.firstName}"></option>
-            </select>
-            Employee
-            <select name="employee">
-                <option th:each="employee : ${employeeList}" th:value="${employee.employeeID}" th:text="${employee.firstName}"></option>
-            </select>
-            Current date
-            <span th:with="currentDate=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-                <input type="date" name="startDate" th:value="${currentDate}">
-            </span>
-            End date
-<!--            <input type="date" name="endDate" th:value="${endDate}">-->
-            <input type="date" name="endDate" th:value="${leaseType}" pattern="\d{4}-\d{2}-\d{2}" placeholder="yyyy-mm-dd">
-            Pickup location
-            <select name="locationPickup">
-                <option th:each="location : ${locationList}" th:text="${location}"></option>
-            </select>
-            Return location
-            <select name="locationReturn">
-                <option th:each="location : ${locationList}" th:text="${location}"></option>
-            </select>
-            Max mileage
-            <input type="number" name="maxMileage">
-            Price
-            <input type="number" name="price">
-            <input class="btn" type="submit" value="Submit" formaction="addLease">
         </div>
 
+        <div class="form-row">
+            <label for="user">Customer:</label>
+            <select id="user" name="user" class="form-input">
+                <option th:each="user : ${userList}" th:value="${user.userID}" th:text="${user.firstName}"></option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="employee">Employee:</label>
+            <select id="employee" name="employee" class="form-input">
+                <option th:each="employee : ${employeeList}" th:value="${employee.employeeID}" th:text="${employee.firstName}"></option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" th:value="${currentDate}" class="form-input">
+        </div>
+
+        <div class="form-row">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" th:value="${leaseType}" pattern="\d{4}-\d{2}-\d{2}" placeholder="yyyy-mm-dd" class="form-input">
+        </div>
+
+        <div class="form-row">
+            <label for="locationPickup">Pickup Location:</label>
+            <select id="locationPickup" name="locationPickup" class="form-input">
+                <option th:each="location : ${locationList}" th:text="${location}"></option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="locationReturn">Return Location:</label>
+            <select id="locationReturn" name="locationReturn" class="form-input">
+                <option th:each="location : ${locationList}" th:text="${location}"></option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="maxMileage">Max Mileage:</label>
+            <input type="number" id="maxMileage" name="maxMileage" class="form-input">
+        </div>
+
+        <div class="form-row">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" class="form-input">
+        </div>
+
+        <input class="btn" type="submit" value="Submit" formaction="addLease">
     </form>
 </div>
 </body>
