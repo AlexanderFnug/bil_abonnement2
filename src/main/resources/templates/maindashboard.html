@@ -38,11 +38,9 @@
                 <td th:with="car=${list[0]}" th:text="${car.brand + ' ' + car.modelName}"></td>
                 <td>
                     <span th:if="${list[1] != null}" th:with="lease=${list[1]}" th:text="${lease.leaseID}"></span>
-                    <span th:if="${list[1] == null}"> </span>
                 </td>
                 <td>
                     <span th:if="${list[2] != null}" th:with="user=${list[2]}" th:text="${user.firstName + ' ' + user.lastName}"></span>
-                    <span th:if="${list[2] == null}"> </span>
                 </td>
             </tr>
             <tr th:if="${currentTab == 'leased' && list[1] != null}" th:each="list : ${mergedList}">
