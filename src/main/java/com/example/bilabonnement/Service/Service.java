@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -52,6 +53,34 @@ public class Service {
         return total;
     }
 
+    public List<HashMap> getMergedLeaseListAsMap(){
+        List<HashMap> mergedList = new ArrayList<>();
+        List<User> tempUserList = fetchAllUsers();
+        List<Car> tempCarList = fetchAllCars();
+        List<Lease> tempLeaseList = fetchAllLeases();
+        List<Lease> tempActiveLeaseList = getActiveLeases();
+        for (Lease lease : tempLeaseList) {
+            HashMap<String, Object> mergedMap = new HashMap<>();
+            mergedMap.put("lease", lease);
+            for (Lease activeLease : tempActiveLeaseList) {
+                if (lease.getLeaseID() == activeLease.getLeaseID()){
+                    mergedMap.put("status", true);
+                }
+            }
+            for (User user : tempUserList) {
+                if (lease.getUserID() == user.getUserID()){
+                    mergedMap.put("user", user);
+                }
+            }
+            for (Car car : tempCarList) {
+                if (lease.getCarID() == car.getCarID()){
+                    mergedMap.put("car", car);
+                }
+            }
+            mergedList.add(mergedMap);
+        }
+        return mergedList;
+    }
     public List<Object[]> getMergedLeaseList(){ //TODO: Use sql query instead??????
         List<Object[]> mergedList = new ArrayList<>();
         List<User> tempUserList = fetchAllUsers();

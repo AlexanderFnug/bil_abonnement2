@@ -27,21 +27,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="list : ${mergedList}">
-            <td>
-                <span th:if="${list[0] != null}" th:with="lease=${list[0]}" th:text="${lease.leaseID}"></span>
-            </td>
-            <td>
-                <span th:if="${list[2] != null}" th:with="user=${list[2]}" th:text="${user.firstName + ' ' + user.lastName}"></span>
-            </td>
-            <td>
-                <span th:if="${list[2] != null}" th:with="user=${list[2]}" th:text="${user.email}"></span>
-            </td>
-            <td th:with="car=${list[3]}" th:text="${car.carID}"></td>
-            <td th:with="car=${list[3]}" th:text="${car.brand + ' ' + car.modelName}"></td>
-            <td>
-                <span th:if="${list[1]}" th:text="ACTIVE"></span>
-            </td>
+        <tr th:each="map : ${mergedMapList}">
+            <td th:if="${map.containsKey('lease')}" th:with="obj=${map.lease}" th:text="${obj.leaseID}"></td>
+            <td th:if="${map.containsKey('user')}" th:with="obj=${map.user}" th:text="${obj.firstName + ' ' + obj.lastName}"></td>
+            <td th:if="${map.containsKey('user')}" th:with="obj=${map.user}" th:text="${obj.email}"></td>
+            <td th:if="${map.containsKey('car')}" th:with="obj=${map.car}" th:text="${obj.carID}"></td>
+            <td th:if="${map.containsKey('car')}" th:with="obj=${map.car}" th:text="${obj.brand + ' ' + obj.modelName}"></td>
+            <td th:if="${map.containsKey('status')}" th:text="ACTIVE"></td>
         </tr>
         </tbody>
     </table>
