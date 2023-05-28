@@ -45,7 +45,7 @@ public class Service {
     }
     public double getLeasedTotal(){
         Double total = 0.0;
-        List<Lease> leaseList = fetchAllLeases();
+        List<Lease> leaseList = getActiveLeases();
         for (Lease lease : leaseList) {
             total += lease.getPrice();
         }
