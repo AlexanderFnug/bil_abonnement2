@@ -24,9 +24,7 @@ public class LeaseController {
 
     @GetMapping("/leaseDashboard")
     public String leaseDashboard(Model model){
-        List<Object[]> mergedList = service.getMergedLeaseList();
         List<HashMap> mergedMapList = service.getMergedLeaseListAsMap();
-        model.addAttribute("mergedList", mergedList);
         model.addAttribute("mergedMapList", mergedMapList);
         return "leasedashboard.html";
     }
