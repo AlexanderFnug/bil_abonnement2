@@ -1,8 +1,9 @@
 /* Global styles */
 body {
     font-family: "Roboto Light", monospace, Georgia, "Savoye LET";
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
+    max-width: 1100px;
 }
 
 /* Container styles */
@@ -12,6 +13,7 @@ body {
     box-shadow: 4px 4px 8px lightgrey ;
     padding: 1.5rem 2rem;
     margin: 20px;
+
 }
 /* Additional styles */
 .container span {
@@ -34,12 +36,22 @@ body {
     flex-direction: column;
 }
 
+.label{
+    font-family: "Roboto Light", monospace, Georgia, "Savoye LET";
+    margin: 1rem;
+    padding: 4px;
+}
+
 /* Navigation bar styles */
 .nav-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #f0f0f0;
+    background-image: url("Sky.webp");
+    background-size: 1200px;
+    background-position: center -110px;
+    background-repeat: no-repeat;
+
     padding: 10px;
 }
 
@@ -77,6 +89,7 @@ body {
 .btn2:hover {
     background-color: rgba(253, 51, 57, 0.8);
     box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
 }
 
 .header {
@@ -123,8 +136,9 @@ body {
 .edit:hover {
     background-color: #9fea9f;
     color: #003400;
-    padding: 7px;
+
     box-shadow: -2px 2px 5px gray;
+    transform: translateY(-1px);
 }
 .delete{
     all: unset;
@@ -138,7 +152,7 @@ body {
 .delete:hover{
     background: #eaadaf;
     color: #003400;
-    padding: 5px;
+    transform: translateY(-1px);
     box-shadow: -2px 2px 5px gray;
 
 }
@@ -168,6 +182,7 @@ body {
     background-color: #000;
     color: #fff;
     box-shadow: 0.2rem 0.2rem 2rem #bcbbbb;
+    transform: translateY(-1px);
 }
 
 /* Table styles */
