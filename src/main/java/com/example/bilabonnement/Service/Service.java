@@ -53,6 +53,13 @@ public class Service {
         return total;
     }
 
+    /**
+     * Gets three lists from the database(leases, cars and users).
+     * Then it matches them in a map where appropriate. e.g. Lease object with the userID of 1 is matched with
+     * the User object with the userID of 1 etc.
+     * The goal was to make managing multiple lists in thymeleaf easier.
+     * @return
+     */
     public List<HashMap> getMergedLeaseListAsMap(){
         List<HashMap> mergedList = new ArrayList<>();
         List<User> tempUserList = fetchAllUsers();
@@ -81,6 +88,12 @@ public class Service {
         }
         return mergedList;
     }
+
+    /**
+     * Deprecated. Does the same as above, but with an Object array instead of a HashMap.
+     * More annoying to use and more prone to errors.
+     * @return
+     */
     public List<Object[]> getMergedLeaseList(){ //TODO: Use sql query instead??????
         List<Object[]> mergedList = new ArrayList<>();
         List<User> tempUserList = fetchAllUsers();
@@ -109,7 +122,12 @@ public class Service {
         }
         return mergedList;
     }
-    public List<Object[]> getMergedCarList(){ //TODO: Use sql query instead??????
+
+    /**
+     * Same as getMergedLeaseListAsMap. But with an Object array instead.
+     * @return
+     */
+    public List<Object[]> getMergedCarList(){ //TODO: Change use of object array to HashMap.
         List<Object[]> mergedList = new ArrayList<>();
         List<User> tempUserList = fetchAllUsers();
         List<Car> tempCarList = fetchAllCars();
@@ -138,6 +156,12 @@ public class Service {
         return mergedList;
     }
 
+    /**
+     * Service is given a temporary employee object containing password and email.
+     * It looks for a match in the database and returns the full User object.
+     * @param employee
+     * @return
+     */
     public Integer userVerification(Employee employee) {
         List<Employee> tempEmployeeList = repo.fetchAllEmployees();
         for (Employee listEmp : tempEmployeeList) {
