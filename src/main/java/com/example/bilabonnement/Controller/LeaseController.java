@@ -17,6 +17,16 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * General explanation that applies to all controllers:
+ *      There are some repeating methods in all controllers e.g. carForm, employeeDashboard etc.,
+ *      all that these methods handle is navigating the user to the appropriate html page, possibly
+ *      with the parameter 'model' which lets us use the spring Model object to store data
+ *      that thymeleaf can then access. Add-/Delete-/Edit user/car/etc. use WebRequest to
+ *      get the neceassary information from the html fields and then performs necessary CRUD operation
+ *      with the 'add-' methods creating a new object through '@ModelAttribute <Model> <Name>', and
+ *      using setters to set the correct values gotten from WebRequest.
+ */
 @Controller
 public class LeaseController {
     @Autowired
@@ -24,7 +34,7 @@ public class LeaseController {
 
     @GetMapping("/leaseDashboard")
     public String leaseDashboard(Model model){
-        List<HashMap> mergedMapList = service.getMergedLeaseListAsMap();
+        List<HashMap> mergedMapList = service.getMergedLeaseListAsMap(); //Merges leases, cars and users into one ordered list of maps.
         model.addAttribute("mergedMapList", mergedMapList);
         return "leasedashboard.html";
     }
@@ -36,6 +46,7 @@ public class LeaseController {
         List<User> userList = service.fetchAllUsers();
         List<Employee> employeeList = service.fetchAllEmployees();
         List<String> locationList = service.fetchAllLocations();
+
         //Remove already leased cars TODO: Move to service layer
         for (int i = 0; i < leaseableCarList.size(); i++) {
             for (Lease l : leaseList) {
@@ -49,7 +60,7 @@ public class LeaseController {
         model.addAttribute("employeeList",employeeList);
         model.addAttribute("locationList",locationList);
 
-        //Ugly code to calculate preset end date
+        //Ugly code to calculate pre-set end date - TODO: Move to service layer
         LocalDate endDate = LocalDate.now();
         switch (wr.getParameter("leaseLength")){
             case "lease3M":
@@ -75,6 +86,9 @@ public class LeaseController {
         lease.setCarID(Integer.parseInt(wr.getParameter("car")));
         lease.setMaxMileage(Integer.parseInt(wr.getParameter("maxMileage")));
         lease.setPrice(Double.parseDouble(wr.getParameter("price")));
+
+        //Since we don't have a location model(unfortunately), location objects are just String objects.
+        //We need to match the string with its database equivalent to get the ID. TODO: Create location model as extension of the String class but with ID
         lease.setLocationPickupID(service.getMatchingID(wr.getParameter("locationPickup"),
                                     service.fetchAllLocations()));
         lease.setLocationReturnID(service.getMatchingID(wr.getParameter("locationReturn"),
