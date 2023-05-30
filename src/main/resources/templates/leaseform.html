@@ -14,21 +14,21 @@
         <div class="form-row">
             <label for="car">Car:</label>
             <select id="car" name="car" class="form-input">
-                <option th:each="car : ${carList}" th:value="${car.carID}" th:text="${car.modelName}"></option>
+                <option th:each="car : ${carList}" th:value="${car.carID}" th:text="${car.brand + ' ' + car.modelName}"></option>
             </select>
         </div>
 
         <div class="form-row">
             <label for="user">Customer:</label>
             <select id="user" name="user" class="form-input">
-                <option th:each="user : ${userList}" th:value="${user.userID}" th:text="${user.firstName}"></option>
+                <option th:each="user : ${userList}" th:value="${user.userID}" th:text="${user.firstName + ' ' + user.lastName}"></option>
             </select>
         </div>
 
         <div class="form-row">
             <label for="employee">Employee:</label>
             <select id="employee" name="employee" class="form-input">
-                <option th:each="employee : ${employeeList}" th:value="${employee.employeeID}" th:text="${employee.firstName}"></option>
+                <option th:each="employee : ${employeeList}" th:value="${employee.employeeID}" th:text="${employee.firstName + ' ' + employee.lastName}"></option>
             </select>
         </div>
 

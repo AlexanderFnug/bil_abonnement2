@@ -99,12 +99,46 @@ public class LeaseController {
     }
 
     @PostMapping("/removeLease")
-    public String removeLease(){
+    public String removeLease(WebRequest wr){
+        int tempID = Integer.parseInt(wr.getParameter("leaseID"));
+        List<Lease> activeLeaseList = service.getActiveLeases();
+
+        //Check if lease is active
+        breakableLoop:
+        for (Lease lease : activeLeaseList) {
+            if (lease.getLeaseID() == tempID){
+                //TODO: Show error popup
+                break breakableLoop;
+            }
+        }
         return "redirect:/leasedashboard";
     }
 
     @PostMapping("/editLease")
-    public String editLease(){
+    public String editLease(WebRequest wr, Model model){
+        Lease tempLease = service.getLeaseByID(Integer.parseInt(wr.getParameter("leaseID")));
+        model.addAttribute("lease", tempLease);
+
+        //COPYPASTED CODE FROM leaseForm(): TODO: Move stuff to service. Other solution to avoid redundancy?
+        List<Lease> leaseList = service.fetchAllLeases();
+        List<Car> leaseableCarList = service.fetchAllCars();
+        List<User> userList = service.fetchAllUsers();
+        List<Employee> employeeList = service.fetchAllEmployees();
+        List<String> locationList = service.fetchAllLocations();
+
+        //Remove already leased cars TODO: Move to service layer
+        for (int i = 0; i < leaseableCarList.size(); i++) {
+            for (Lease l : leaseList) {
+                if (leaseableCarList.get(i).getCarID() == l.getCarID()){
+                    leaseableCarList.remove(i);
+                }
+            }
+        }
+        model.addAttribute("carList",leaseableCarList);
+        model.addAttribute("userList",userList);
+        model.addAttribute("employeeList",employeeList);
+        model.addAttribute("locationList",locationList);
+
         return "redirect:/leaseform";
     }
 
