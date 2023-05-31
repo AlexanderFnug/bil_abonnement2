@@ -24,7 +24,7 @@
             <th>Car ID</th>
             <th>Car</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th>Actions (N/A)</th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
             <td th:if="${map.containsKey('car')}" th:with="obj=${map.car}" th:text="${obj.brand + ' ' + obj.modelName}"></td>
             <td th:if="${map.containsKey('status')}" th:text="ACTIVE"></td>
             <td>
-                <form method="post" class="btns"> <!--Not finished. formactions removed.-->
+                <form method="post" class="btns"> <!--Not finished. formactions removed temporarily.-->
                     <input class="edit" type="submit" value="Edit">
                     <input class="delete" type="submit" value="Delete">
                     <input type="hidden" th:with="obj=${map.lease}" th:value="${obj.leaseID}" name="leaseID">
