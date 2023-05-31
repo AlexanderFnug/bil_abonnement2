@@ -61,6 +61,7 @@ public class LeaseController {
         model.addAttribute("locationList",locationList);
 
         //Ugly code to calculate pre-set end date - TODO: Move to service layer
+        //Set pass the default date value to thymeleaf depending on button pressed. End date field is set to 'endDate'.
         LocalDate endDate = LocalDate.now();
         switch (wr.getParameter("leaseLength")){
             case "lease3M":
@@ -70,7 +71,7 @@ public class LeaseController {
                 endDate = endDate.plusMonths(6);
                 break;
             case "leaseYear":
-                endDate = endDate.plusYears(1);
+                endDate = endDate.plusYears(3);
                 break;
         }
         model.addAttribute("leaseType",endDate);
